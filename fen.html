@@ -1,0 +1,244 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/chess.js"></script>
+    <script type="text/javascript" src="js/site.js"></script>
+    <script type="text/javascript" src="js/chessboard-0.3.0.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="styles\site.css" rel="stylesheet" type="text/css">
+    <link href="styles\custom.css" rel="stylesheet" type="text/css">
+    <link href="styles/chessboard-0.3.0.css" rel="stylesheet" type="text/css">
+  </head><body>
+    <div class="page-wrap">
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+            <span class="sr-only">Menu</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <a class="navbar-brand" href="#"><img src="img/logo/name_large_transp.png" width="260"></a>
+        <div class="collapse navbar-collapse menu" id="navbar-ex-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="index.html">HOME</a>
+            </li>
+            <li>
+                <a href="howitworks.html">HOW IT WORKS?</a>
+            </li>
+            <li>
+                <a href="fen.html">FEN</a>
+            </li>
+            <li>
+                <a href="pgn.html">PGN</a>
+            </li>
+            <li>
+                <a href="contact.html">CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 vcenter">
+            <div id="board" style="width: 400px"></div>
+            <div class="row" style="margin-top:10px;">
+              <div class="col-md-1">
+                <h4>FEN:</h4>
+              </div>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="fen" readonly="">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 text-center vcenter">
+            <label>Next move</label>
+            <ul class="list-group">
+              <span id="nextMoveGroup">
+                <li class="list-group-item">
+                  <label>
+                    <input type="radio" name="nextMove" value="w" checked=""> White</label>
+                </li>
+                <li class="list-group-item">
+                  <label>
+                    <input type="radio" name="nextMove" value="b"> Black</label>
+                </li>
+              </span>
+            </ul>
+            <label>Castling Rights</label>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <label>
+                  <input type="checkbox" id="wK"> White Kingside</label>
+              </li>
+              <li class="list-group-item">
+                <label>
+                  <input type="checkbox" id="wQ"> White Queenside</label>
+              </li>
+              <li class="list-group-item">
+                <label>
+                  <input type="checkbox" id="bK"> Black Kingside</label>
+              </li>
+              <li class="list-group-item">
+                <label>
+                  <input type="checkbox" id="bQ"> Black Queenside</label>
+              </li>
+            </ul>
+            <label>En-passant square</label>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <div class="form-group">
+                  <label for="sel1">Select list:</label>
+                  <select class="form-control" id="enPassant">
+                    <option selected="selected" value="">Select a square</option>
+                    <option value="a3">a3</option>
+                    <option value="b3">b3</option>
+                    <option value="c3">c3</option>
+                    <option value="d3">d3</option>
+                    <option value="e3">e3</option>
+                    <option value="f3">f3</option>
+                    <option value="g3">g3</option>
+                    <option value="h3">h3</option>
+                    <option value="a6">a6</option>
+                    <option value="b6">b6</option>
+                    <option value="c6">c6</option>
+                    <option value="d6">d6</option>
+                    <option value="e6">e6</option>
+                    <option value="f6">f6</option>
+                    <option value="g6">g6</option>
+                    <option value="h6">h6</option>
+                  </select>
+                </div>
+              </li>
+            </ul>
+            <a class="btn btn-lg btn-success" onclick="btnClick();">GET CODE <i class="fa fa-arrow-right fa-fw"></i></a>
+          </div>
+          <div class="col-md-4 vcenter">
+            <img id="imgFen" src="https://chart.googleapis.com/chart?chs=400x400&amp;cht=qr&amp;chl=8/8/8/8/8/8/8/8 w - -" class="img-responsive">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div id="footer"></div>
+    <script>
+      $("#header").load("header.html");
+            $("#footer").load("footer.html");
+
+            var board,
+             game = new Chess(),
+             fenEl = $('#fen'),
+             imgFen = $('#imgFen'),
+             nextMoveSide = 'w',
+             wK = $('#wK'),
+             wKStr = '',
+             wQ = $('#wQ'),
+             wQStr = '',
+             bK = $('#bK'),
+             bKStr = '',
+             bQ = $('#bQ'),
+             bQStr = '',
+             strCastling = "",
+             finalFen = "",
+             enPassant = $('#enPassant');
+             enPassantStr = '-';
+
+              $("input[name=nextMove]").click(function(){
+                  nextMoveSide = $('input[name=nextMove]:checked', '#nextMoveGroup').val();
+                  updateStatus();
+              });
+
+              $('#wK').click(function() {
+                  if (this.checked) {
+                    wKStr = 'K'
+                  }else{
+                    wKStr = '';
+                  }
+
+                  updateStatus();
+              });
+
+              $('#wQ').click(function() {
+                  if (this.checked) {
+                    wQStr = 'Q'
+                  }else{
+                    wQStr = '';
+                  }
+
+                  updateStatus();
+              });
+
+              $('#bK').click(function() {
+                  if (this.checked) {
+                    bKStr = 'k'
+                  }else{
+                    bKStr = '';
+                  }
+
+                  updateStatus();
+              });
+
+              $('#bQ').click(function() {
+                  if (this.checked) {
+                    bQStr = 'q'
+                  }else{
+                    bQStr = '';
+                  }
+
+                  updateStatus();
+              });
+
+              enPassant.on("change paste keyup", function() {
+                enPassantStr = $(this).val();
+                 updateStatus();
+              });
+
+             // update the board position after the piece snap
+             // for castling, en passant, pawn promotion
+             var onSnapEnd = function() {
+               console.log(board.fen());
+               updateStatus();
+             };
+
+             var updateStatus = function() {
+
+               strCastling = wKStr+wQStr+bKStr+bQStr;
+
+               if (strCastling == '') {
+                 strCastling = '-'
+               }
+
+               if (enPassantStr == '') {
+                 enPassantStr = '-'
+               }
+
+               finalFen = board.fen()+" "+nextMoveSide+" "+strCastling+" "+enPassantStr;
+               fenEl.attr("value", finalFen);
+             };
+
+             var btnClick = function(){
+               imgFen.attr("src","https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl="+finalFen);
+             };
+
+             var cfg = {
+               pieceTheme: 'img/chesspieces/alpha/{piece}.png',
+               draggable: true,
+               sparePieces: true,
+               dropOffBoard: 'trash',
+               onSnapEnd: onSnapEnd
+             };
+             board = ChessBoard('board', cfg);
+
+             updateStatus();
+    </script>
+
+
+</body></html>

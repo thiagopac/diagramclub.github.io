@@ -1,0 +1,60 @@
+/* CUSTOMIZAÇÕES */
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-brand {
+  padding: 3px 15px;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #DB5538;
+  background-color: #212d39;
+}
+
+.section-custom {
+  background-color: #DB5538 !important;
+  color: #ffffff;
+}
+
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -209px;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.site-footer, .page-wrap:after {
+  height: 209px;
+}
+
+.linked {
+  border-bottom: 1px dotted #777;
+  text-decoration: none;
+}
+
+.linked:hover, .linked:active{
+  border-bottom: 1px dotted #D2527F;
+  color: #D2527F;
+  text-decoration: none;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #b3b3b3;
+  background-color: transparent;
+}
