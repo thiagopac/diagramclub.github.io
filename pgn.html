@@ -11,7 +11,6 @@
         <link href="styles\custom.css" rel="stylesheet" type="text/css">
         <link href="styles/chessboard-0.3.0.css" rel="stylesheet" type="text/css">
     </head><body>
-        <div class="page-wrap">
         <div class="navbar navbar-default navbar-static-top">
           <div class="container">
             <div class="navbar-header">
@@ -22,7 +21,7 @@
                 <span class="icon-bar"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#"><img src="img/logo/name_large_transp.png" width="260"></a>
+            <a class="navbar-brand" href="#"><img src="img/logo/name_large_transp.png" width="210"></a>
             <div class="collapse navbar-collapse menu" id="navbar-ex-collapse">
               <ul class="nav navbar-nav navbar-right">
                   <li>
@@ -48,39 +47,43 @@
         <div class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-5 vcenter">
-                        <div id="board" style="width: 400px"></div>
-                        <div class="row" style="margin-top:10px;">
-                            <div class="col-md-10">
-                                <h4 id="status"></h4>
-                            </div>
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-4 text-right"><h4 id="status"></h4></div>
+                        <div class="col-md-4 text-center"><div id="board" style="width: 100%"></div></div>
+                        <div class="col-md-4 text-left">
+                          <div class="row">
+                            <div class="col-md-2"><h4>FEN:</h4></div><div class="col-md-10"><input type="text" class="form-control" id="fen" readonly=""></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-2"><h4>PGN:</h4></div><div class="col-md-10"><input type="text" class="form-control" id="pgn" readonly=""></div>
+                          </div>
                         </div>
-                        <div class="row" style="margin-top:10px;">
-                            <div class="col-md-1">
-                                <h4>FEN:</h4>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="fen" readonly="">
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:10px;">
-                            <div class="col-md-1">
-                                <h4>PGN:</h4>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="pgn" readonly="">
-                            </div>
-                        </div>
+                      </div>
                     </div>
-                    <div class="col-md-2 text-center vcenter">
-                        <a class="btn btn-lg btn-success" onclick="btnClick();">GET CODE <i class="fa fa-arrow-right fa-fw"></i></a>
+                  </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                    <div class="col-md-12 text-center">
+                      <div class="row top-buffer">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 text-center"><a class="btn btn-lg btn-success" onclick="btnClick();">GET CODE <i class="fa fa-arrow-down fa-fw"></i></a></div>
+                        <div class="col-md-4"></div>
+                      </div>
                     </div>
-                    <div class="col-md-4 vcenter">
-                        <img id="imgPgn" src="https://chart.googleapis.com/chart?chs=400x400&amp;cht=qr&amp;chl=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" class="img-responsive">
+                  </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                    <div class="col-md-12">
+                      <div class="col-md-3"></div>
+                      <div class="col-md-6 text-center"><img id="imgPgn" src="https://chart.googleapis.com/chart?chs=400x400&amp;cht=qr&amp;chl=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"></div>
+                      <div class="col-md-3"></div>
                     </div>
                 </div>
             </div>
-        </div>
+          </div>
         <div id="footer"></div>
         <script>
             $("#header").load("header.html");
@@ -93,6 +96,45 @@
                  pgnEl = $('#pgn'),
                  imgPgn = $('#imgPgn');
 
+                 var removeGreySquares = function() {
+                   $('#board .square-55d63').css('background', '');
+                 };
+
+                 var greySquare = function(square) {
+
+                    var squareEl = $('#board .square-' + square);
+
+                    var background = '#a9a9a9';
+                    if (squareEl.hasClass('black-3c85d') === true) {
+                      background = '#696969';
+                    }
+
+                    squareEl.css('background', background);
+                  };
+
+                 var onMouseoverSquare = function(square, piece) {
+                   // get list of possible moves for this square
+                   var moves = game.moves({
+                     square: square,
+                     verbose: true
+                   });
+
+                   // exit if there are no moves available for this square
+                   if (moves.length === 0) return;
+
+                   // highlight the square they moused over
+                   greySquare(square);
+
+                   // highlight the possible squares for this piece
+                   for (var i = 0; i < moves.length; i++) {
+                     greySquare(moves[i].to);
+                   }
+                 };
+
+                 var onMouseoutSquare = function(square, piece) {
+                    removeGreySquares();
+                 };
+
                  // do not pick up pieces if the game is over
                  // only pick up pieces for the side to move
                  var onDragStart = function(source, piece, position, orientation) {
@@ -104,6 +146,8 @@
                  };
 
                  var onDrop = function(source, target) {
+
+                   removeGreySquares();
                    // see if the move is legal
                    var move = game.move({
                      from: source,
@@ -167,10 +211,12 @@
                    position: 'start',
                    onDragStart: onDragStart,
                    onDrop: onDrop,
-                   onSnapEnd: onSnapEnd
+                   onSnapEnd: onSnapEnd,
+                   onMouseoutSquare: onMouseoutSquare,
+                   onMouseoverSquare: onMouseoverSquare
                  };
                  board = ChessBoard('board', cfg);
-
+                 $(window).resize(board.resize);
                  updateStatus();
         </script>
 

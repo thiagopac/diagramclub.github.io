@@ -11,7 +11,6 @@
     <link href="styles\custom.css" rel="stylesheet" type="text/css">
     <link href="styles/chessboard-0.3.0.css" rel="stylesheet" type="text/css">
   </head><body>
-    <div class="page-wrap">
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -22,7 +21,7 @@
             <span class="icon-bar"></span>
           </button>
         </div>
-        <a class="navbar-brand" href="#"><img src="img/logo/name_large_transp.png" width="260"></a>
+        <a class="navbar-brand" href="#"><img src="img/logo/name_large_transp.png" width="210"></a>
         <div class="collapse navbar-collapse menu" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
@@ -48,8 +47,8 @@
     <div class="section">
       <div class="container">
         <div class="row">
-          <div class="col-md-5 vcenter">
-            <div id="board" style="width: 400px"></div>
+          <div class="col-md-5">
+            <div id="board" style="width: 98%"></div>
             <div class="row" style="margin-top:10px;">
               <div class="col-md-1">
                 <h4>FEN:</h4>
@@ -59,7 +58,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-2 text-center vcenter">
+          <div class="col-md-2 text-center">
             <label>Next move</label>
             <ul class="list-group">
               <span id="nextMoveGroup">
@@ -121,13 +120,12 @@
             </ul>
             <a class="btn btn-lg btn-success" onclick="btnClick();">GET CODE <i class="fa fa-arrow-right fa-fw"></i></a>
           </div>
-          <div class="col-md-4 vcenter">
+          <div class="col-md-4">
             <img id="imgFen" src="https://chart.googleapis.com/chart?chs=400x400&amp;cht=qr&amp;chl=8/8/8/8/8/8/8/8 w - -" class="img-responsive">
           </div>
         </div>
       </div>
     </div>
-  </div>
     <div id="footer"></div>
     <script>
       $("#header").load("header.html");
@@ -236,7 +234,7 @@
                onSnapEnd: onSnapEnd
              };
              board = ChessBoard('board', cfg);
-
+            $(window).resize(board.resize);
              updateStatus();
     </script>
 
