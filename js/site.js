@@ -7,6 +7,8 @@ $(function(){
             // and test its normalized href against the url pathname regexp
             if(urlRegExp.test(this.href.replace(/\/$/,''))){
                 $(this.parentNode).addClass('active');
+            }else if (this.href.replace(/\/$/,'') == "http://diagramclub.github.io/"){
+                $("div.nav").find("home").addClass('active');
             }
         });
 });
