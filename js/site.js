@@ -8,7 +8,7 @@ $(function(){
 
             if(this.href.replace(/\/$/,'') == "http://diagramclub.github.io/" || this.href.replace(/\/$/,'') == "http://diagramclub.github.io"){
                 $(this.parentNode).addClass('active');
-                return;
+                return false;
             }
 
             if(urlRegExp.test(this.href.replace(/\/$/,''))){
