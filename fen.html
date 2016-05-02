@@ -47,84 +47,114 @@
     <div class="section">
       <div class="container">
         <div class="row">
-          <div class="col-md-5">
-            <div id="board" style="width: 98%"></div>
-            <div class="row" style="margin-top:10px;">
-              <div class="col-md-1">
-                <h4>FEN:</h4>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-2 text-center"></div>
+              <div class="col-md-2 text-center">
+                <div class="text-center">
+                <label>Boart state</label>
               </div>
-              <div class="col-md-9">
-                <input type="text" class="form-control" id="fen" readonly="">
+              <ul class="list-group">
+                  <li class="list-group-item">
+                    <a class="btn" id="startBtn">Initial</a>
+                  </li>
+                  <li class="list-group-item">
+                    <a class="btn" id="clearBtn">Clear</a>
+                  </li>
+              </ul>
+              </div>
+              <div class="col-md-4 text-center"><div id="board" style="width: 98%"></div></div>
+              <div class="col-md-2 text-left">
+                <div class="text-center">
+                  <label>Next move</label>
+                </div>
+                <ul class="list-group">
+                  <span id="nextMoveGroup">
+                    <li class="list-group-item">
+                      <label>
+                        <input type="radio" name="nextMove" value="w" checked=""> White</label>
+                    </li>
+                    <li class="list-group-item">
+                      <label>
+                        <input type="radio" name="nextMove" value="b"> Black</label>
+                    </li>
+                  </span>
+                </ul>
+                <div class="text-center">
+                  <label>Castling Rights</label>
+                </div>
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <label>
+                      <input type="checkbox" id="wK"> White Kingside</label>
+                  </li>
+                  <li class="list-group-item">
+                    <label>
+                      <input type="checkbox" id="wQ"> White Queenside</label>
+                  </li>
+                  <li class="list-group-item">
+                    <label>
+                      <input type="checkbox" id="bK"> Black Kingside</label>
+                  </li>
+                  <li class="list-group-item">
+                    <label>
+                      <input type="checkbox" id="bQ"> Black Queenside</label>
+                  </li>
+                </ul>
+                <div class="text-center">
+                  <label>En-passant square</label>
+                </div>
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <div class="form-group">
+                      <label for="sel1">Select list:</label>
+                      <select class="form-control" id="enPassant">
+                        <option selected="selected" value="">Select a square</option>
+                        <option value="a3">a3</option>
+                        <option value="b3">b3</option>
+                        <option value="c3">c3</option>
+                        <option value="d3">d3</option>
+                        <option value="e3">e3</option>
+                        <option value="f3">f3</option>
+                        <option value="g3">g3</option>
+                        <option value="h3">h3</option>
+                        <option value="a6">a6</option>
+                        <option value="b6">b6</option>
+                        <option value="c6">c6</option>
+                        <option value="d6">d6</option>
+                        <option value="e6">e6</option>
+                        <option value="f6">f6</option>
+                        <option value="g6">g6</option>
+                        <option value="h6">h6</option>
+                      </select>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
-          <div class="col-md-2 text-center">
-            <label>Next move</label>
-            <ul class="list-group">
-              <span id="nextMoveGroup">
-                <li class="list-group-item">
-                  <label>
-                    <input type="radio" name="nextMove" value="w" checked=""> White</label>
-                </li>
-                <li class="list-group-item">
-                  <label>
-                    <input type="radio" name="nextMove" value="b"> Black</label>
-                </li>
-              </span>
-            </ul>
-            <label>Castling Rights</label>
-            <ul class="list-group">
-              <li class="list-group-item">
-                <label>
-                  <input type="checkbox" id="wK"> White Kingside</label>
-              </li>
-              <li class="list-group-item">
-                <label>
-                  <input type="checkbox" id="wQ"> White Queenside</label>
-              </li>
-              <li class="list-group-item">
-                <label>
-                  <input type="checkbox" id="bK"> Black Kingside</label>
-              </li>
-              <li class="list-group-item">
-                <label>
-                  <input type="checkbox" id="bQ"> Black Queenside</label>
-              </li>
-            </ul>
-            <label>En-passant square</label>
-            <ul class="list-group">
-              <li class="list-group-item">
-                <div class="form-group">
-                  <label for="sel1">Select list:</label>
-                  <select class="form-control" id="enPassant">
-                    <option selected="selected" value="">Select a square</option>
-                    <option value="a3">a3</option>
-                    <option value="b3">b3</option>
-                    <option value="c3">c3</option>
-                    <option value="d3">d3</option>
-                    <option value="e3">e3</option>
-                    <option value="f3">f3</option>
-                    <option value="g3">g3</option>
-                    <option value="h3">h3</option>
-                    <option value="a6">a6</option>
-                    <option value="b6">b6</option>
-                    <option value="c6">c6</option>
-                    <option value="d6">d6</option>
-                    <option value="e6">e6</option>
-                    <option value="f6">f6</option>
-                    <option value="g6">g6</option>
-                    <option value="h6">h6</option>
-                  </select>
-                </div>
-              </li>
-            </ul>
-            <a class="btn btn-lg btn-success" onclick="btnClick();">GET CODE <i class="fa fa-arrow-right fa-fw"></i></a>
-          </div>
-          <div class="col-md-4">
-            <img id="imgFen" src="https://chart.googleapis.com/chart?chs=400x400&amp;cht=qr&amp;chl=8/8/8/8/8/8/8/8 w - -" class="img-responsive">
+        </div>
+      </div>
+      <div class="container">
+          <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="row top-buffer">
+              <div class="col-md-4"></div>
+              <div class="col-md-4 text-center"><a class="btn btn-lg btn-success" onclick="btnClick();">GET CODE <i class="fa fa-arrow-down fa-fw"></i></a></div>
+              <div class="col-md-4"></div>
+            </div>
           </div>
         </div>
       </div>
+      <div class="container">
+                  <div class="row">
+                  <div class="col-md-12">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6 text-center"><img style="margin: 0 auto;" id="imgFen" src="https://chart.googleapis.com/chart?chs=400x400&amp;cht=qr&amp;chl=8/8/8/8/8/8/8/8 w - -" class="img-responsive"></div>
+                    <div class="col-md-3"></div>
+                  </div>
+              </div>
+          </div>
     </div>
     <div id="footer"></div>
     <script>
@@ -234,6 +264,8 @@
                onSnapEnd: onSnapEnd
              };
              board = ChessBoard('board', cfg);
+             $('#startBtn').on('click', board.start);
+             $('#clearBtn').on('click', board.clear);
             $(window).resize(board.resize);
              updateStatus();
     </script>
