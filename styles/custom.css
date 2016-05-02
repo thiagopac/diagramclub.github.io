@@ -32,3 +32,8 @@
 }
 
 .top-buffer { margin-top:20px; }
+
+.list-group-item {
+  padding: 11px 15px;
+  border: 1px solid #eee;
+}

@@ -52,14 +52,14 @@
               <div class="col-md-2 text-center"></div>
               <div class="col-md-2 text-center">
                 <div class="text-center">
-                <label>Boart state</label>
+                <label>Board state</label>
               </div>
               <ul class="list-group">
                   <li class="list-group-item">
-                    <a class="btn" id="startBtn">Initial</a>
+                    <a class="btn btn-info" id="startBtn" onclick="startClick();">INITIAL</a>
                   </li>
                   <li class="list-group-item">
-                    <a class="btn" id="clearBtn">Clear</a>
+                    <a class="btn btn-warning" id="clearBtn" onclick="clearClick();">CLEAR</a>
                   </li>
               </ul>
               </div>
@@ -138,6 +138,11 @@
       <div class="container">
           <div class="row">
           <div class="col-md-12 text-center">
+            <div class="row">
+              <div class="col-md-4 text-right"><h4>FEN:</h4></div><div class="col-md-4"><input type="text" class="form-control" id="fen" readonly=""></div>
+
+            </div>
+
             <div class="row top-buffer">
               <div class="col-md-4"></div>
               <div class="col-md-4 text-center"><a class="btn btn-lg btn-success" onclick="btnClick();">GET CODE <i class="fa fa-arrow-down fa-fw"></i></a></div>
@@ -181,7 +186,7 @@
 
               $("input[name=nextMove]").click(function(){
                   nextMoveSide = $('input[name=nextMove]:checked', '#nextMoveGroup').val();
-                  updateStatus();
+                  updateStatus(null);
               });
 
               $('#wK').click(function() {
@@ -191,7 +196,7 @@
                     wKStr = '';
                   }
 
-                  updateStatus();
+                  updateStatus(null);
               });
 
               $('#wQ').click(function() {
@@ -201,7 +206,7 @@
                     wQStr = '';
                   }
 
-                  updateStatus();
+                  updateStatus(null);
               });
 
               $('#bK').click(function() {
@@ -211,7 +216,7 @@
                     bKStr = '';
                   }
 
-                  updateStatus();
+                  updateStatus(null);
               });
 
               $('#bQ').click(function() {
@@ -221,22 +226,34 @@
                     bQStr = '';
                   }
 
-                  updateStatus();
+                  updateStatus(null);
               });
 
               enPassant.on("change paste keyup", function() {
                 enPassantStr = $(this).val();
-                 updateStatus();
+                 updateStatus(null);
               });
 
              // update the board position after the piece snap
              // for castling, en passant, pawn promotion
              var onSnapEnd = function() {
-               console.log(board.fen());
-               updateStatus();
+               updateStatus(null);
              };
 
-             var updateStatus = function() {
+             var onDrop = function(source, target, piece, newPos, oldPos, orientation) {
+
+               //se a peça saiu do tabuleiro, ela foi descartada e é preciso atualizar o código fen
+                if (target == "offboard") {
+                  updateStatus(newPos);
+                  return 'trash';
+
+                }
+
+              };
+
+             var updateStatus = function(newPos) {
+
+               var fenPosition;
 
                strCastling = wKStr+wQStr+bKStr+bQStr;
 
@@ -248,7 +265,13 @@
                  enPassantStr = '-'
                }
 
-               finalFen = board.fen()+" "+nextMoveSide+" "+strCastling+" "+enPassantStr;
+               if(newPos){
+                 fenPosition = ChessBoard.objToFen(newPos);
+               }else{
+                 fenPosition = board.fen()
+               }
+
+               finalFen = fenPosition+" "+nextMoveSide+" "+strCastling+" "+enPassantStr;
                fenEl.attr("value", finalFen);
              };
 
@@ -256,18 +279,29 @@
                imgFen.attr("src","https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl="+finalFen);
              };
 
+             var startClick = function(){
+               board.start();
+               updateStatus(null);
+             };
+
+             var clearClick = function(){
+               board.clear();
+               updateStatus(null);
+             };
+
              var cfg = {
                pieceTheme: 'img/chesspieces/alpha/{piece}.png',
                draggable: true,
                sparePieces: true,
                dropOffBoard: 'trash',
-               onSnapEnd: onSnapEnd
+               onSnapEnd: onSnapEnd,
+               onDrop : onDrop
              };
+
              board = ChessBoard('board', cfg);
-             $('#startBtn').on('click', board.start);
-             $('#clearBtn').on('click', board.clear);
+
             $(window).resize(board.resize);
-             updateStatus();
+             updateStatus(null);
     </script>
 
 
