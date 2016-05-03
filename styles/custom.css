@@ -25,6 +25,18 @@
   text-decoration: none;
 }
 
+.linkedLight {
+  border-bottom: 1px dotted #fff;
+  text-decoration: none;
+  color: #fff;
+}
+
+.linkedLight:hover, .linkedLight:active{
+  border-bottom: 1px dotted #333;
+  color: #333;
+  text-decoration: none;
+}
+
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
   color: #b3b3b3;
