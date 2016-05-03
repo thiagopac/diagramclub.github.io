@@ -30,7 +30,7 @@
             <li>
                 <a href="howitworks.html">HOW IT WORKS?</a>
             </li>
-            <li>
+            <li class="active">
                 <a href="fen.html">FEN</a>
             </li>
             <li>
@@ -161,11 +161,39 @@
               </div>
           </div>
     </div>
-    <div id="footer"></div>
+    <footer class="section section-custom">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <img src="img/logo/name_large_transp.png" class="img-responsive" width="380">
+            <p>Diagram Club is an app and a website, made with <a href="http://diagramclub.github.io/img/assets/love.png" target="_blank" class="linkedLight">love</a> using wonderful libraries
+              like <a href="https://github.com/official-stockfish" target="_blank" class="linkedLight">Stockfish UCI Chess Engine</a>, <a href="http://chessboardjs.com/" target="_blank" class="linkedLight">ChessBoard.JS</a>, <a href="https://github.com/jhlywa/chess.js" target="_blank" class="linkedLight">Chess.JS</a>,
+              and others.</p>
+          </div>
+          <div class="col-sm-6">
+            <p class="text-info text-right">
+              <br>
+              <br>
+            </p>
+            <div class="row">
+              <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
+                <a href="https://www.instagram.com/diagramclub/"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                <a href="https://twitter.com/diagramclub"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                <a href="http://facebook.com/diagramclub"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 hidden-xs text-right">
+                <a href="https://www.instagram.com/diagramclub/"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                <a href="https://twitter.com/diagramclub"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                <a href="http://facebook.com/diagramclub"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
     <script>
-      $("#header").load("header.html");
-            $("#footer").load("footer.html");
-
             var board,
              game = new Chess(),
              fenEl = $('#fen'),
