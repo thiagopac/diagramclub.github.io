@@ -52,12 +52,7 @@
                           <div class="col-md-1"></div>
                         <div class="col-md-3 text-right">
                             <div class="row"><h4 id="status"></h4></div>
-                            <div class="row"></div>
-                            <div class="text-right">
-                                <div class="row"><h4>PGN:</h4></div>
-                                <div class="row"></div>
-                                <div class="row"><textarea class="form-control" rows="5" id="pgn" readonly=""></textarea></div>
-                            </div>
+
                         </div>
                         <div class="col-md-4 text-center"><div id="board" style="width: 100%"></div></div>
                         <div class="col-md-2 text-left">
@@ -88,6 +83,11 @@
                               </ul>
                               </div>
                           </div>
+                          <div class="text-left">
+                              <div class="row"><h4>PGN:</h4></div>
+                              <div class="row"><textarea class="form-control" rows="3" id="pgn" readonly=""></textarea></div>
+                          </div>
+
                         </div>
                       </div>
                     </div>
@@ -263,6 +263,8 @@
                    statusEl.html(status);
                    fenEl.attr('value',game.fen());
                    pgnEl.val(game.pgn());
+                   if(pgnEl.length)
+                     pgnEl.scrollTop(pgnEl[0].scrollHeight - pgnEl.height());
 
                  };
 
