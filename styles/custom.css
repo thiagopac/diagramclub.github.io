@@ -37,3 +37,12 @@
   padding: 11px 15px;
   border: 1px solid #eee;
 }
+
+.piece {
+    display: inline-block;
+    padding: 5px 15px;
+}
+.piece.taphover:hover, .piece.taphover.hover {
+    background: red;
+    color: white;
+}
