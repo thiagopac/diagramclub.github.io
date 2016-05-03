@@ -3,6 +3,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.qrcode-0.12.0.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
     <script type="text/javascript" src="js/chess.js"></script>
     <script type="text/javascript" src="js/site.js"></script>
     <script type="text/javascript" src="js/chessboard-0.3.0.js"></script>
@@ -140,22 +142,15 @@
           <div class="col-md-12 text-center">
             <div class="row">
               <div class="col-md-4 text-right"><h4>FEN:</h4></div><div class="col-md-4"><input type="text" class="form-control" id="fen" readonly=""></div>
-
-            </div>
-
-            <div class="row top-buffer">
-              <div class="col-md-4"></div>
-              <div class="col-md-4 text-center"><a class="btn btn-lg btn-success" onclick="btnClick();">GET CODE <i class="fa fa-arrow-down fa-fw"></i></a></div>
-              <div class="col-md-4"></div>
             </div>
           </div>
         </div>
       </div>
       <div class="container">
-                  <div class="row">
+                  <div class="row top-buffer">
                   <div class="col-md-12">
                     <div class="col-md-3"></div>
-                    <div class="col-md-6 text-center"><img style="margin: 0 auto;" id="imgFen" src="https://chart.googleapis.com/chart?chs=400x400&amp;cht=qr&amp;chl=8/8/8/8/8/8/8/8 w - -" class="img-responsive"></div>
+                    <div class="col-md-6 text-center"><div id="qrcode"></div></div>
                     <div class="col-md-3"></div>
                   </div>
               </div>
@@ -301,7 +296,28 @@
 
                finalFen = fenPosition+" "+nextMoveSide+" "+strCastling+" "+enPassantStr;
                fenEl.attr("value", finalFen);
+
+               if (finalFen != "8/8/8/8/8/8/8/8 w - -")
+                  createQR(finalFen);
              };
+
+             var createQR = function(string){
+                         $('#qrcode').empty().qrcode({
+                             // https://larsjung.de/jquery-qrcode/
+                             render: 'image',
+                             ecLevel: 'Q',
+                             size: 300,
+                             fill: '#2d3e4e',
+                             mode: 2,
+                             label: 'Diagram Club',
+                             fontname: 'Muli',
+                             mSize: 0.1,
+                             fontcolor: '#DB5538',
+                             radius: 0.5,
+                             quiet: 0,
+                             text: string
+                             });
+                     };
 
              var btnClick = function(){
                imgFen.attr("src","https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl="+finalFen);

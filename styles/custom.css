@@ -49,3 +49,7 @@
   padding: 11px 15px;
   border: 1px solid #eee;
 }
+
+#img-buffer {
+    display: none;
+}

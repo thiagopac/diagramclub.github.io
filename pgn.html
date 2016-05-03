@@ -2,13 +2,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.qrcode-0.12.0.js"></script>
         <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/chess.js"></script>
-        <script type="text/javascript" src="js/site.js"></script>
         <script type="text/javascript" src="js/chessboard-0.3.0.js"></script>
         <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="styles\site.css" rel="stylesheet" type="text/css">
-        <link href="styles\custom.css" rel="stylesheet" type="text/css">
+        <link href="styles/site.css" rel="stylesheet" type="text/css">
+        <link href="styles/custom.css" rel="stylesheet" type="text/css">
         <link href="styles/chessboard-0.3.0.css" rel="stylesheet" type="text/css">
     </head><body>
         <div class="navbar navbar-default navbar-static-top">
@@ -94,21 +94,10 @@
                   </div>
                 </div>
                 <div class="container">
-                    <div class="row">
-                    <div class="col-md-12 text-center">
-                      <div class="row top-buffer">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 text-center"><a class="btn btn-lg btn-success" onclick="btnClick();">GET CODE <i class="fa fa-arrow-down fa-fw"></i></a></div>
-                        <div class="col-md-4"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="container">
-                    <div class="row">
+                    <div class="row top-buffer">
                     <div class="col-md-12">
                       <div class="col-md-3"></div>
-                      <div class="col-md-6 text-center"><img style="margin: 0 auto;" class="img-responsive" id="imgPgn" src="https://chart.googleapis.com/chart?chs=400x400&amp;cht=qr&amp;chl=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"></div>
+                      <div class="col-md-6 text-center"><div id="qrcode"></div></div>
                       <div class="col-md-3"></div>
                     </div>
                 </div>
@@ -147,6 +136,8 @@
             </div>
           </footer>
         <script>
+
+
 
               var board,
                  game = new Chess(),
@@ -266,10 +257,30 @@
                    if(pgnEl.length)
                      pgnEl.scrollTop(pgnEl[0].scrollHeight - pgnEl.height());
 
+                   if (game.pgn())
+                     createQR(game.pgn());
+                 };
+
+                 var createQR = function(string){
+                     $('#qrcode').empty().qrcode({
+                         // https://larsjung.de/jquery-qrcode/
+                         render: 'image',
+                         ecLevel: 'Q',
+                         size: 300,
+                         fill: '#2d3e4e',
+                         mode: 2,
+                         label: 'Diagram Club',
+                         fontname: 'Muli',
+                         mSize: 0.1,
+                         fontcolor: '#DB5538',
+                         radius: 0.5,
+                         quiet: 0,
+                         text: string
+                         });
                  };
 
                  var btnClick = function(){
-                   imgPgn.attr("src","https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl="+game.pgn());
+                //    imgPgn.attr("src","https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl="+game.pgn());
                  };
 
                  var cfg = {
@@ -285,6 +296,8 @@
                  board = ChessBoard('board', cfg);
                  $(window).resize(board.resize);
                  updateStatus();
+
+
         </script>
 
 
