@@ -49,7 +49,34 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="row">
-                        <div class="col-md-4 text-right"><h4 id="status"></h4></div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2 text-right"><h4 id="status"></h4>
+                          <div class="text-center">
+                            <div class="text-center">
+                              <label>Promote to</label>
+                            </div>
+                          <ul class="list-group">
+                            <span id="promotionChoiceGroup">
+                              <li class="list-group-item">
+                                <label>
+                                  <input type="radio" name="promotionChoice" value="q" checked=""> Queen</label>
+                              </li>
+                              <li class="list-group-item">
+                                <label>
+                                  <input type="radio" name="promotionChoice" value="r"> Rook</label>
+                              </li>
+                              <li class="list-group-item">
+                                <label>
+                                  <input type="radio" name="promotionChoice" value="b"> Bishop</label>
+                              </li>
+                              <li class="list-group-item">
+                                <label>
+                                  <input type="radio" name="promotionChoice" value="n"> Knight</label>
+                              </li>
+                            </span>
+                          </ul>
+                          </div>
+                        </div>
                         <div class="col-md-4 text-center"><div id="board" style="width: 100%"></div></div>
                         <div class="col-md-4 text-left">
                           <div class="row">
@@ -91,7 +118,12 @@
                  statusEl = $('#status'),
                  fenEl = $('#fen'),
                  pgnEl = $('#pgn'),
-                 imgPgn = $('#imgPgn');
+                 imgPgn = $('#imgPgn')
+                 promotionChoice = "q";
+
+                 $("input[name=promotionChoice]").click(function(){
+                     promotionChoice = $('input[name=promotionChoice]:checked', '#promotionChoiceGroup').val();
+                 });
 
                  var removeGreySquares = function() {
                    $('#board .square-55d63').css('background', '');
@@ -149,7 +181,7 @@
                    var move = game.move({
                      from: source,
                      to: target,
-                     promotion: 'q' // NOTE: always promote to a queen for example simplicity
+                     promotion: promotionChoice // NOTE: always promote to a queen for example simplicity
                    });
 
                    // illegal move
