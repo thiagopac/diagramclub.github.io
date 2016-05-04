@@ -148,7 +148,7 @@
                   <div class="row top-buffer">
                   <div class="col-md-12">
                     <div class="col-md-3"></div>
-                    <div class="col-md-6 text-center"><div id="container"><canvas class="img-responsive" style="display: initial" width="300" height="300" id="qrcode"></div></canvas></div>
+                    <div class="col-md-6 text-center"><div id="containerQrCode"><canvas class="img-responsive" style="display: initial" width="300" height="300"></div></canvas></div>
                     <div class="col-md-3"></div>
                   </div>
               </div>
@@ -302,7 +302,7 @@
          };
 
          var createQR = function(string){
-                     $('#container').empty().qrcode({
+                     $('#containerQrCode').empty().qrcode({
                          // https://larsjung.de/jquery-qrcode/
                          render: 'image',
                          ecLevel: 'Q',
