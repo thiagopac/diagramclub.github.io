@@ -4,9 +4,7 @@
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.qrcode-0.12.0.js"></script>
-    <script type="text/javascript" src="js/scripts.js"></script>
     <script type="text/javascript" src="js/chess.js"></script>
-    <script type="text/javascript" src="js/site.js"></script>
     <script type="text/javascript" src="js/chessboard-0.3.0.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="styles\site.css" rel="stylesheet" type="text/css">
@@ -150,7 +148,7 @@
                   <div class="row top-buffer">
                   <div class="col-md-12">
                     <div class="col-md-3"></div>
-                    <div class="col-md-6 text-center"><div id="qrcode"></div></div>
+                    <div class="col-md-6 text-center"><canvas class="img-responsive" style="display: initial" width="300" height="300" id="qrcode"></canvas></div>
                     <div class="col-md-3"></div>
                   </div>
               </div>
@@ -188,165 +186,159 @@
         </div>
       </div>
     </footer>
-    <script>
-            var board,
-             game = new Chess(),
-             fenEl = $('#fen'),
-             imgFen = $('#imgFen'),
-             nextMoveSide = 'w',
-             wK = $('#wK'),
-             wKStr = '',
-             wQ = $('#wQ'),
-             wQStr = '',
-             bK = $('#bK'),
-             bKStr = '',
-             bQ = $('#bQ'),
-             bQStr = '',
-             strCastling = "",
-             finalFen = "",
-             enPassant = $('#enPassant');
-             enPassantStr = '-';
+<img id="img-buffer" src="img/assets/name_qrcode.png">
+</body>
+<script>
+        var board,
+         game = new Chess(),
+         fenEl = $('#fen'),
+         imgFen = $('#imgFen'),
+         nextMoveSide = 'w',
+         wK = $('#wK'),
+         wKStr = '',
+         wQ = $('#wQ'),
+         wQStr = '',
+         bK = $('#bK'),
+         bKStr = '',
+         bQ = $('#bQ'),
+         bQStr = '',
+         strCastling = "",
+         finalFen = "",
+         enPassant = $('#enPassant');
+         enPassantStr = '-';
 
-              $("input[name=nextMove]").click(function(){
-                  nextMoveSide = $('input[name=nextMove]:checked', '#nextMoveGroup').val();
-                  updateStatus(null);
-              });
+          $("input[name=nextMove]").click(function(){
+              nextMoveSide = $('input[name=nextMove]:checked', '#nextMoveGroup').val();
+              updateStatus(null);
+          });
 
-              $('#wK').click(function() {
-                  if (this.checked) {
-                    wKStr = 'K'
-                  }else{
-                    wKStr = '';
-                  }
+          $('#wK').click(function() {
+              if (this.checked) {
+                wKStr = 'K'
+              }else{
+                wKStr = '';
+              }
 
-                  updateStatus(null);
-              });
+              updateStatus(null);
+          });
 
-              $('#wQ').click(function() {
-                  if (this.checked) {
-                    wQStr = 'Q'
-                  }else{
-                    wQStr = '';
-                  }
+          $('#wQ').click(function() {
+              if (this.checked) {
+                wQStr = 'Q'
+              }else{
+                wQStr = '';
+              }
 
-                  updateStatus(null);
-              });
+              updateStatus(null);
+          });
 
-              $('#bK').click(function() {
-                  if (this.checked) {
-                    bKStr = 'k'
-                  }else{
-                    bKStr = '';
-                  }
+          $('#bK').click(function() {
+              if (this.checked) {
+                bKStr = 'k'
+              }else{
+                bKStr = '';
+              }
 
-                  updateStatus(null);
-              });
+              updateStatus(null);
+          });
 
-              $('#bQ').click(function() {
-                  if (this.checked) {
-                    bQStr = 'q'
-                  }else{
-                    bQStr = '';
-                  }
+          $('#bQ').click(function() {
+              if (this.checked) {
+                bQStr = 'q'
+              }else{
+                bQStr = '';
+              }
 
-                  updateStatus(null);
-              });
+              updateStatus(null);
+          });
 
-              enPassant.on("change paste keyup", function() {
-                enPassantStr = $(this).val();
-                 updateStatus(null);
-              });
-
-             // update the board position after the piece snap
-             // for castling, en passant, pawn promotion
-             var onSnapEnd = function() {
-               updateStatus(null);
-             };
-
-             var onDrop = function(source, target, piece, newPos, oldPos, orientation) {
-
-               //se a peça saiu do tabuleiro, ela foi descartada e é preciso atualizar o código fen
-                if (target == "offboard") {
-                  updateStatus(newPos);
-                  return 'trash';
-
-                }
-
-              };
-
-             var updateStatus = function(newPos) {
-
-               var fenPosition;
-
-               strCastling = wKStr+wQStr+bKStr+bQStr;
-
-               if (strCastling == '') {
-                 strCastling = '-'
-               }
-
-               if (enPassantStr == '') {
-                 enPassantStr = '-'
-               }
-
-               if(newPos){
-                 fenPosition = ChessBoard.objToFen(newPos);
-               }else{
-                 fenPosition = board.fen()
-               }
-
-               finalFen = fenPosition+" "+nextMoveSide+" "+strCastling+" "+enPassantStr;
-               fenEl.attr("value", finalFen);
-
-               if (finalFen != "8/8/8/8/8/8/8/8 w - -")
-                  createQR(finalFen);
-             };
-
-             var createQR = function(string){
-                         $('#qrcode').empty().qrcode({
-                             // https://larsjung.de/jquery-qrcode/
-                             render: 'image',
-                             ecLevel: 'Q',
-                             size: 300,
-                             fill: '#2d3e4e',
-                             mode: 2,
-                             label: 'Diagram Club',
-                             fontname: 'Muli',
-                             mSize: 0.1,
-                             fontcolor: '#DB5538',
-                             radius: 0.5,
-                             quiet: 0,
-                             text: string
-                             });
-                     };
-
-             var btnClick = function(){
-               imgFen.attr("src","https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl="+finalFen);
-             };
-
-             var startClick = function(){
-               board.start();
-               updateStatus(null);
-             };
-
-             var clearClick = function(){
-               board.clear();
-               updateStatus(null);
-             };
-
-             var cfg = {
-               pieceTheme: 'img/chesspieces/alpha/{piece}.png',
-               draggable: true,
-               sparePieces: true,
-               dropOffBoard: 'trash',
-               onSnapEnd: onSnapEnd,
-               onDrop : onDrop
-             };
-
-             board = ChessBoard('board', cfg);
-
-            $(window).resize(board.resize);
+          enPassant.on("change paste keyup", function() {
+            enPassantStr = $(this).val();
              updateStatus(null);
-    </script>
+          });
 
+         // update the board position after the piece snap
+         // for castling, en passant, pawn promotion
+         var onSnapEnd = function() {
+           updateStatus(null);
+         };
 
-</body></html>
+         var onDrop = function(source, target, piece, newPos, oldPos, orientation) {
+
+           //se a peça saiu do tabuleiro, ela foi descartada e é preciso atualizar o código fen
+            if (target == "offboard") {
+              updateStatus(newPos);
+              return 'trash';
+
+            }
+
+          };
+
+         var updateStatus = function(newPos) {
+
+           var fenPosition;
+
+           strCastling = wKStr+wQStr+bKStr+bQStr;
+
+           if (strCastling == '') {
+             strCastling = '-'
+           }
+
+           if (enPassantStr == '') {
+             enPassantStr = '-'
+           }
+
+           if(newPos){
+             fenPosition = ChessBoard.objToFen(newPos);
+           }else{
+             fenPosition = board.fen()
+           }
+
+           finalFen = fenPosition+" "+nextMoveSide+" "+strCastling+" "+enPassantStr;
+           fenEl.attr("value", finalFen);
+
+           if (finalFen != "8/8/8/8/8/8/8/8 w - -")
+              createQR(finalFen);
+         };
+
+         var createQR = function(string){
+                     $('#qrcode').empty().qrcode({
+                         // https://larsjung.de/jquery-qrcode/
+                         render: 'image',
+                         ecLevel: 'Q',
+                         size: 300,
+                         fill: '#2d3e4e',
+                         mode: 4,
+                         mSize: 0.1,
+                         radius: 0.5,
+                         quiet: 0,
+                         text: string,
+                         image: $('#img-buffer')[0]
+                         });
+                 };
+
+         var startClick = function(){
+           board.start();
+           updateStatus(null);
+         };
+
+         var clearClick = function(){
+           board.clear();
+           updateStatus(null);
+         };
+
+         var cfg = {
+           pieceTheme: 'img/chesspieces/alpha/{piece}.png',
+           draggable: true,
+           sparePieces: true,
+           dropOffBoard: 'trash',
+           onSnapEnd: onSnapEnd,
+           onDrop : onDrop
+         };
+
+         board = ChessBoard('board', cfg);
+
+        $(window).resize(board.resize);
+         updateStatus(null);
+</script>
+</html>

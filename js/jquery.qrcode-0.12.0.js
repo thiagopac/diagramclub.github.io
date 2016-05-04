@@ -314,7 +314,7 @@
     // Returns an `image` element representing the QR code for the given settings.
     function createImage(settings) {
 
-        return $('<img/>').attr('src', createCanvas(settings)[0].toDataURL('image/png'));
+        return $('<img style="display:initial" class="img-responsive"/>').attr('src', createCanvas(settings)[0].toDataURL('image/png'));
     }
 
     // Returns a `div` element representing the QR code for the given settings.
