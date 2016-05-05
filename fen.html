@@ -146,9 +146,20 @@
       </div>
       <div class="container">
                   <div class="row top-buffer">
-                  <div class="col-md-12">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6 text-center"><div id="containerQrCode" style="display: none;"><canvas class="img-responsive" style="display: initial" width="300" height="300"></div></canvas></div>
+                    <div class="col-md-12">
+                      <div class="col-md-3"></div>
+                        <div class="col-md-6 text-center">
+                             <div id="QRandButton" style="display: none;">
+                               <div class="row">
+                                   <div id="containerQrCode">
+                                       <canvas class="img-responsive" style="display: initial" width="300" height="300"></canvas>
+                                   </div>
+                               </div>
+                               <div class="row top-buffer text-center">
+                                   If you have a valid position but your QR-Code is unreadable, generate a new QR-Code with more error correction by clicking <a class="linked" onclick="unreadableClick();">here</a>
+                               </div>
+                           </div>
+                       </div>
                     <div class="col-md-3"></div>
                   </div>
               </div>
@@ -298,8 +309,25 @@
            fenEl.attr("value", finalFen);
 
            if (finalFen != "8/8/8/8/8/8/8/8 w - -")
-              $('#containerQrCode').removeAttr('style');
+              $('#QRandButton').removeAttr('style');
               createQR(finalFen);
+
+
+            var unreadableClick = function() {
+                $('#containerQrCode').empty().qrcode({
+                    // https://larsjung.de/jquery-qrcode/
+                    render: 'image',
+                    ecLevel: 'H',
+                    size: 300,
+                    fill: '#2d3e4e',
+                    mode: 4,
+                    mSize: 0.1,
+                    radius: 0.5,
+                    quiet: 0,
+                    text: finalFen,
+                    image: $('#img-buffer')[0]
+                    });
+            };
          };
 
          var createQR = function(string){
