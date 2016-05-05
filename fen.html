@@ -311,23 +311,22 @@
            if (finalFen != "8/8/8/8/8/8/8/8 w - -")
               $('#QRandButton').removeAttr('style');
               createQR(finalFen);
+         };
 
-
-            var unreadableClick = function() {
-                $('#containerQrCode').empty().qrcode({
-                    // https://larsjung.de/jquery-qrcode/
-                    render: 'image',
-                    ecLevel: 'H',
-                    size: 300,
-                    fill: '#2d3e4e',
-                    mode: 4,
-                    mSize: 0.1,
-                    radius: 0.5,
-                    quiet: 0,
-                    text: finalFen,
-                    image: $('#img-buffer')[0]
-                    });
-            };
+         var unreadableClick = function() {
+             $('#containerQrCode').empty().qrcode({
+                 // https://larsjung.de/jquery-qrcode/
+                 render: 'image',
+                 ecLevel: 'H',
+                 size: 300,
+                 fill: '#2d3e4e',
+                 mode: 4,
+                 mSize: 0.1,
+                 radius: 0.5,
+                 quiet: 0,
+                 text: finalFen,
+                 image: $('#img-buffer')[0]
+                 });
          };
 
          var createQR = function(string){
