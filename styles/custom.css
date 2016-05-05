@@ -23,6 +23,7 @@
   border-bottom: 1px dotted #D2527F;
   color: #D2527F;
   text-decoration: none;
+  cursor: default;
 }
 
 .linkedLight {
