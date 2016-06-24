@@ -1,0 +1,28 @@
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        getUrl();
+    });
+function getUrl(){
+        fen = 'fen';
+        url = location.href;
+        fen = fen.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        var regexS = "[\\?&]"+fen+"=([^&#]*)";
+        var regex = new RegExp( regexS );
+        var results = regex.exec( url );
+        console.log(results[1]);
+        return results == null ? null : results[1];
+}
+</script>
+<html>
+<head></head>
+<body >
+
+</body>
+</html>
+
+<p>You will be redirected to the Diagram App if you have already installed...</p>
+<p>If you do not have it, select the platform and click the link to download:</p>
+<p><a href="">iOS</a></p>
+<p><a href="">Android</a></p>

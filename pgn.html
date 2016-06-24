@@ -271,8 +271,8 @@
            statusEl.html(status);
            fenEl.attr('value',game.fen());
            pgnEl.val(game.pgn());
-           pgnLink.text("diagramclub://?pgn="+game.pgn());
-           pgnLink.attr("href", "diagramclub://?pgn="+game.pgn());
+           pgnLink.text("diagramclub://?v="+game.pgn());
+           pgnLink.attr("href", "diagramclub://?v="+game.pgn());
            if(pgnEl.length)
              pgnEl.scrollTop(pgnEl[0].scrollHeight - pgnEl.height());
 
