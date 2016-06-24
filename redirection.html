@@ -5,14 +5,17 @@
         getUrl();
     });
 function getUrl(){
-        fen = 'fen';
+        v = 'v';
         url = location.href;
-        fen = fen.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-        var regexS = "[\\?&]"+fen+"=([^&#]*)";
+        v = v.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        var regexS = "[\\?&]"+v+"=([^&#]*)";
         var regex = new RegExp( regexS );
         var results = regex.exec( url );
         console.log(results[1]);
-        return results == null ? null : results[1];
+
+        // window.location.href = "diagramclub://?v="+results[1];
+        window.location.href = "diagramclub://?v="+results[1];
+        // return results == null ? null : results[1];
 }
 </script>
 <html>
