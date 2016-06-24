@@ -156,6 +156,9 @@
                                    </div>
                                </div>
                                <div class="row top-buffer text-center">
+                                   <a class="linked" id="fenLink" href=""></a>
+                               </div>
+                               <div class="row top-buffer text-center">
                                    <span class="label label-danger">Important</span> If you have a valid position but your QR-Code is unreadable, generate a new QR-Code with more error correction by clicking <a class="linked" onclick="unreadableClick();">here</a>.
                                </div>
                            </div>
@@ -203,6 +206,7 @@
         var board,
          game = new Chess(),
          fenEl = $('#fen'),
+         fenLink = $('#fenLink'),
          imgFen = $('#imgFen'),
          nextMoveSide = 'w',
          wK = $('#wK'),
@@ -307,6 +311,8 @@
 
            finalFen = fenPosition+" "+nextMoveSide+" "+strCastling+" "+enPassantStr;
            fenEl.attr("value", finalFen);
+           fenLink.text("diagramclub://?fen="+finalFen);
+           fenLink.attr("href", "diagramclub://?fen="+finalFen);
 
            if (finalFen != "8/8/8/8/8/8/8/8 w - -")
               $('#QRandButton').removeAttr('style');
