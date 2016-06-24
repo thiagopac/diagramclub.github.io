@@ -105,7 +105,7 @@
                                     </div>
                                 </div>
                                 <div class="row top-buffer text-center">
-                                    <a class="linked" id="pgnLink" href=""></a>
+                                    <a class="linked" id="pgnLink" href="" target="_blank"></a>
                                 </div>
                                 <div class="row top-buffer text-center">
                                     <span class="label label-danger">Important</span> If you have a valid position but your QR-Code is unreadable, generate a new QR-Code with more error correction by clicking <a class="linked" onclick="unreadableClick();">here</a>.
@@ -271,8 +271,8 @@
            statusEl.html(status);
            fenEl.attr('value',game.fen());
            pgnEl.val(game.pgn());
-           pgnLink.text("diagramclub://?v="+game.pgn());
-           pgnLink.attr("href", "diagramclub://?v="+game.pgn());
+           pgnLink.text("ttp://diagramclub.github.io/r.html?v="+game.pgn());
+           pgnLink.attr("href", "ttp://diagramclub.github.io/r.html?v="+game.pgn());
            if(pgnEl.length)
              pgnEl.scrollTop(pgnEl[0].scrollHeight - pgnEl.height());
 
