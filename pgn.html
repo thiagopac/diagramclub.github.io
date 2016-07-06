@@ -65,6 +65,9 @@
                                   <li class="list-group-item">
                                     <a class="btn btn-primary" id="flipBtn" onclick="flipClick();">FLIP</a>
                                   </li>
+                                  <li class="list-group-item">
+                                    <a class="btn btn-success" style="font-family: sans-serif;" id="undoBtn" onclick="undoMove();">UNDO MOVE</a>
+                                  </li>
                               </ul>
                               </div>
                             </div>
@@ -170,8 +173,6 @@
           <img id="img-buffer" src="img/assets/name_qrcode.png">
 </body>
 <script>
-
-
 
       var board,
          game = new Chess(),
@@ -296,9 +297,11 @@
 
            if (game.pgn())
             $('#QRandButton').removeAttr('style');
-             createQR(game.pgn());
+             //createQR(game.pgn());
 
          };
+
+
 
          var unreadableClick = function() {
              $('#containerQrCode').empty().qrcode({
@@ -334,13 +337,19 @@
 
          var startClick = function(){
            board.start();
-           game = new Chess();
+           game.reset();
            updateStatus(null);
-           $('#QRandButton').attr('style','display: none;');  
+           $('#QRandButton').attr('style','display: none;');
          };
 
          var flipClick = function(){
            board.flip();
+           updateStatus(null);
+         };
+
+         var undoMove = function(){
+           game.undo();
+           board.position(game.fen());
            updateStatus(null);
          };
 
