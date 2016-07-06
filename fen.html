@@ -300,6 +300,7 @@
             if (target == "offboard") {
               updateStatus(newPos);
               return 'trash';
+
             }
 
           };
@@ -321,11 +322,12 @@
            if(newPos){
              fenPosition = ChessBoard.objToFen(newPos);
            }else{
-             fenPosition = board.fen();
+             fenPosition = board.fen()
            }
 
            finalFen = fenPosition+" "+nextMoveSide+" "+strCastling+" "+enPassantStr;
-           fenEl.attr("value", finalFen);
+
+           fenEl.val(fenPosition);
            fenLink.text("http://diagramclub.github.io/r.html?v="+finalFen);
            fenLink.attr("href", "http://diagramclub.github.io/r.html?v="+finalFen);
 
@@ -336,7 +338,7 @@
 
          var unreadableClick = function() {
              $('#containerQrCode').empty().qrcode({
-                 // https://larsjung.de/jquery-qrcode/
+                 // https://larsjung.de/jquery-qrcode/,vv
                  render: 'image',
                  ecLevel: 'H',
                  size: 300,
@@ -382,9 +384,8 @@
          };
 
          var updatePosition = function(){
-           game.load(fenEl.val());
            board.position(fenEl.val());
-           updateStatus(fenEl.val());
+           updateStatus(null);
          };
 
          var cfg = {
