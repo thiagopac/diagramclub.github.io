@@ -143,6 +143,7 @@
           <div class="col-md-12 text-center">
             <div class="row">
               <div class="col-md-4 text-right"><h4>FEN:</h4></div><div class="col-md-4"><input type="text" class="form-control" id="fen" readonly=""></div>
+              <div class="col-md-4 text-left"><input type="checkbox" id="checkCustomFEN"> <label>Custom FEN</label><p><a class="btn btn-info" style="display: none" id="updateBtn" onclick="updatePosition();">UPDATE POSITION</a></p></div>
             </div>
           </div>
         </div>
@@ -223,7 +224,19 @@
          strCastling = "",
          finalFen = "",
          enPassant = $('#enPassant');
-         enPassantStr = '-';
+         enPassantStr = '-',
+         isEditableFEN = $('#checkCustomFEN'),
+         updateBtn = $('#updateBtn');
+
+         isEditableFEN.change(function(){
+              if(this.checked){
+                fenEl.removeAttr('readonly');
+                updateBtn.removeAttr('style');
+              }else{
+                fenEl.attr('readonly', 'readonly');
+                updateBtn.attr('style','display: none');
+              }
+          });
 
           $("input[name=nextMove]").click(function(){
               nextMoveSide = $('input[name=nextMove]:checked', '#nextMoveGroup').val();
@@ -366,6 +379,12 @@
 
          var flipClick = function(){
            board.flip();
+           updateStatus(null);
+         };
+
+         var updatePosition = function(){
+           game.load(fenEl.val());
+           board.position(fenEl.val());
            updateStatus(null);
          };
 

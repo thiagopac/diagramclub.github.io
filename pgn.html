@@ -107,6 +107,7 @@
                           <div class="text-left">
                               <div class="row"><h4>PGN:</h4></div>
                               <div class="row"><textarea class="form-control" rows="3" id="pgn" readonly=""></textarea></div>
+                              <input type="checkbox" id="checkCustomPGN"> <label>Custom PGN</label> <a class="btn btn-info" style="display: none" id="updateBtn" onclick="updatePosition();">UPDATE POSITION</a>
                           </div>
 
                         </div>
@@ -181,7 +182,19 @@
          pgnEl = $('#pgn'),
          pgnLink = $('#pgnLink'),
          imgPgn = $('#imgPgn')
-         promotionChoice = "q";
+         promotionChoice = "q",
+         isEditablePGN = $('#checkCustomPGN'),
+         updateBtn = $('#updateBtn');
+
+         isEditablePGN.change(function(){
+              if(this.checked){
+                pgnEl.removeAttr('readonly');
+                updateBtn.removeAttr('style');
+              }else{
+                pgnEl.attr('readonly', 'readonly');
+                updateBtn.attr('style','display: none');
+              }
+          });
 
          $("input[name=promotionChoice]").click(function(){
              promotionChoice = $('input[name=promotionChoice]:checked', '#promotionChoiceGroup').val();
@@ -297,8 +310,7 @@
 
            if (game.pgn())
             $('#QRandButton').removeAttr('style');
-             //createQR(game.pgn());
-
+             createQR(game.pgn());
          };
 
 
@@ -351,6 +363,11 @@
            game.undo();
            board.position(game.fen());
            updateStatus(null);
+         };
+
+         var updatePosition = function(){
+           game.load_pgn(pgnEl.val());
+           board.position(game.fen());
          };
 
          var cfg = {
