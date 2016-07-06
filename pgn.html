@@ -313,8 +313,6 @@
              createQR(game.pgn());
          };
 
-
-
          var unreadableClick = function() {
              $('#containerQrCode').empty().qrcode({
                  // https://larsjung.de/jquery-qrcode/
@@ -363,6 +361,9 @@
            game.undo();
            board.position(game.fen());
            updateStatus(null);
+           if (game.fen() == "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR") {
+             $('#QRandButton').attr('style','display: none;');
+           }
          };
 
          var updatePosition = function(){
