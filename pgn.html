@@ -214,12 +214,20 @@
 
             var squareEl = $('#board .square-' + square);
 
-            var background = 'rgba(241, 218, 14, 0.52)';
+            // var background = 'rgba(241, 218, 14, 0.52)';
+            // if (squareEl.hasClass('black-3c85d') === true) {
+            //   background = 'rgba(241, 218, 14, 0.39)';
+            // }
+
+            var background = 'url("img/assets/select.png")';
+            var backgroundsize = 'contain';
             if (squareEl.hasClass('black-3c85d') === true) {
-              background = 'rgba(241, 218, 14, 0.39)';
+              var background = 'url("img/assets/select2.png")';
             }
 
+
             squareEl.css('background', background);
+            squareEl.css('background-size', backgroundsize);
             squareEl.addClass('taphover');
           };
 
@@ -234,7 +242,7 @@
            if (moves.length === 0) return;
 
            // highlight the square they moused over
-           greySquare(square);
+          //  greySquare(square);
 
            // highlight the possible squares for this piece
            for (var i = 0; i < moves.length; i++) {
@@ -263,7 +271,7 @@
            var move = game.move({
              from: source,
              to: target,
-             promotion: promotionChoice // NOTE: always promote to a queen for example simplicity
+             promotion: promotionChoice
            });
 
            // illegal move
