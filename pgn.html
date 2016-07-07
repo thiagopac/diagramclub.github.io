@@ -361,6 +361,7 @@
            game.undo();
            board.position(game.fen());
            updateStatus(null);
+           console.log(game.fen());
            if (game.fen() == "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR") {
              $('#QRandButton').attr('style','display: none;');
            }
