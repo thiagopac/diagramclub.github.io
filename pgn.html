@@ -370,6 +370,7 @@
            game.load_pgn(pgnEl.val());
            board.position(game.fen());
            createQR(game.pgn());
+           $('#QRandButton').removeAttr('style');
          };
 
          var cfg = {
