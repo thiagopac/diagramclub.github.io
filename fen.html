@@ -1,405 +1,415 @@
-<html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery.qrcode-0.12.0.js"></script>
-    <script type="text/javascript" src="js/chess.js"></script>
-    <script type="text/javascript" src="js/chessboard-0.3.0.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="styles\site.css" rel="stylesheet" type="text/css">
-    <link href="styles\custom.css" rel="stylesheet" type="text/css">
-    <link href="styles/chessboard-0.3.0.css" rel="stylesheet" type="text/css">
-  </head><body>
-    <div class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
-            <span class="sr-only">Menu</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <a class="navbar-brand" href="index.html"><img src="img/logo/name_large_transp.png" width="210"></a>
-        <div class="collapse navbar-collapse menu" id="navbar-ex-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="index.html">HOME</a>
-            </li>
-            <li>
-                <a href="howitworks.html">HOW IT WORKS?</a>
-            </li>
-            <li class="active">
-                <a href="fen.html">FEN</a>
-            </li>
-            <li>
-                <a href="pgn.html">PGN</a>
-            </li>
-            <li>
-                <a href="contact.html">CONTACT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="row">
-              <div class="col-md-2 text-center"></div>
-              <div class="col-md-2 text-center">
-                <div class="text-center">
-                <label>Board state</label>
-              </div>
-              <ul class="list-group">
-                  <li class="list-group-item">
-                    <a class="btn btn-info" id="startBtn" onclick="startClick();">INITIAL</a>
-                  </li>
-                  <li class="list-group-item">
-                    <a class="btn btn-warning" id="clearBtn" onclick="clearClick();">CLEAR</a>
-                  </li>
-                  <li class="list-group-item">
-                    <a class="btn btn-primary" id="flipBtn" onclick="flipClick();">FLIP</a>
-                  </li>
-              </ul>
-              </div>
-              <div class="col-md-4 text-center"><div id="board" style="width: 98%"></div></div>
-              <div class="col-md-2 text-left">
-                <div class="text-center">
-                  <label>Next move</label>
-                </div>
-                <ul class="list-group">
-                  <span id="nextMoveGroup">
-                    <li class="list-group-item">
-                      <label>
-                        <input type="radio" name="nextMove" value="w" checked=""> White</label>
-                    </li>
-                    <li class="list-group-item">
-                      <label>
-                        <input type="radio" name="nextMove" value="b"> Black</label>
-                    </li>
-                  </span>
-                </ul>
-                <div class="text-center">
-                  <label>Castling Rights</label>
-                </div>
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    <label>
-                      <input type="checkbox" id="wK"> White Kingside</label>
-                  </li>
-                  <li class="list-group-item">
-                    <label>
-                      <input type="checkbox" id="wQ"> White Queenside</label>
-                  </li>
-                  <li class="list-group-item">
-                    <label>
-                      <input type="checkbox" id="bK"> Black Kingside</label>
-                  </li>
-                  <li class="list-group-item">
-                    <label>
-                      <input type="checkbox" id="bQ"> Black Queenside</label>
-                  </li>
-                </ul>
-                <div class="text-center">
-                  <label>En-passant square</label>
-                </div>
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    <div class="form-group">
-                      <label for="sel1">Select list:</label>
-                      <select class="form-control" id="enPassant">
-                        <option selected="selected" value="">Select a square</option>
-                        <option value="a3">a3</option>
-                        <option value="b3">b3</option>
-                        <option value="c3">c3</option>
-                        <option value="d3">d3</option>
-                        <option value="e3">e3</option>
-                        <option value="f3">f3</option>
-                        <option value="g3">g3</option>
-                        <option value="h3">h3</option>
-                        <option value="a6">a6</option>
-                        <option value="b6">b6</option>
-                        <option value="c6">c6</option>
-                        <option value="d6">d6</option>
-                        <option value="e6">e6</option>
-                        <option value="f6">f6</option>
-                        <option value="g6">g6</option>
-                        <option value="h6">h6</option>
-                      </select>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+      <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/jquery.qrcode-0.12.0.js"></script>
+      <script type="text/javascript" src="js/chess.js"></script>
+      <script type="text/javascript" src="js/chessboard-0.3.0.js"></script>
+      <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      <link href="styles\site.css" rel="stylesheet" type="text/css">
+      <link href="styles\custom.css" rel="stylesheet" type="text/css">
+      <link href="styles/chessboard-0.3.0.css" rel="stylesheet" type="text/css">
+   </head>
+   <body>
+      <div class="navbar navbar-default navbar-static-top">
+         <div class="container">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+               <span class="sr-only">Menu</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-          <div class="row">
-          <div class="col-md-12 text-center">
-            <div class="row">
-              <div class="col-md-4 text-right"><h4>FEN:</h4></div><div class="col-md-4"><input type="text" class="form-control" id="fen" readonly=""></div>
-              <div class="col-md-4 text-left"><input type="checkbox" id="checkCustomFEN"> <label>Custom FEN</label><p><a class="btn btn-info" style="display: none" id="updateBtn" onclick="updatePosition();">UPDATE POSITION</a></p></div>
+            <a class="navbar-brand" href="index.html"><img src="img/logo/name_large_transp.png" width="210"></a>
+            <div class="collapse navbar-collapse menu" id="navbar-ex-collapse">
+               <ul class="nav navbar-nav navbar-right">
+                  <li>
+                     <a href="index.html">HOME</a>
+                  </li>
+                  <li>
+                     <a href="howitworks.html">HOW IT WORKS?</a>
+                  </li>
+                  <li class="active">
+                     <a href="fen.html">FEN</a>
+                  </li>
+                  <li>
+                     <a href="pgn.html">PGN</a>
+                  </li>
+                  <li>
+                     <a href="contact.html">CONTACT</a>
+                  </li>
+               </ul>
             </div>
-          </div>
-        </div>
+         </div>
       </div>
-      <div class="container">
-                  <div class="row top-buffer">
-                    <div class="col-md-12">
-                      <div class="col-md-3"></div>
-                        <div class="col-md-6 text-center">
-                             <div id="QRandButton" style="display: none;">
-                               <div class="row">
-                                   <div id="containerQrCode">
-                                       <canvas class="img-responsive" style="display: initial" width="300" height="300"></canvas>
-                                   </div>
-                               </div>
-                               <div class="row top-buffer text-center">
-                                   <a class="linked" id="fenLink" href="" target="_blank"></a>
-                               </div>
-                               <div class="row top-buffer text-center">
-                                   <span class="label label-danger">Important</span> If you have a valid position but your QR-Code is unreadable, generate a new QR-Code with more error correction by clicking <a class="linked" onclick="unreadableClick();">here</a>.
-                               </div>
-                           </div>
-                       </div>
-                    <div class="col-md-3"></div>
+      <div class="section">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="row">
+                     <div class="col-md-2 text-center"></div>
+                     <div class="col-md-2 text-center">
+                        <div class="text-center">
+                           <label>Board state</label>
+                        </div>
+                        <ul class="list-group">
+                           <li class="list-group-item">
+                              <a class="btn btn-info" id="startBtn" onclick="startClick();">INITIAL</a>
+                           </li>
+                           <li class="list-group-item">
+                              <a class="btn btn-warning" id="clearBtn" onclick="clearClick();">CLEAR</a>
+                           </li>
+                           <li class="list-group-item">
+                              <a class="btn btn-primary" id="flipBtn" onclick="flipClick();">FLIP</a>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="col-md-4 text-center">
+                        <div id="board" style="width: 98%"></div>
+                     </div>
+                     <div class="col-md-2 text-left">
+                        <div class="text-center">
+                           <label>Next move</label>
+                        </div>
+                        <ul class="list-group">
+                           <span id="nextMoveGroup">
+                              <li class="list-group-item">
+                                 <label>
+                                 <input type="radio" name="nextMove" value="w" checked=""> White</label>
+                              </li>
+                              <li class="list-group-item">
+                                 <label>
+                                 <input type="radio" name="nextMove" value="b"> Black</label>
+                              </li>
+                           </span>
+                        </ul>
+                        <div class="text-center">
+                           <label>Castling Rights</label>
+                        </div>
+                        <ul class="list-group">
+                           <li class="list-group-item">
+                              <label>
+                              <input type="checkbox" id="wK"> White Kingside</label>
+                           </li>
+                           <li class="list-group-item">
+                              <label>
+                              <input type="checkbox" id="wQ"> White Queenside</label>
+                           </li>
+                           <li class="list-group-item">
+                              <label>
+                              <input type="checkbox" id="bK"> Black Kingside</label>
+                           </li>
+                           <li class="list-group-item">
+                              <label>
+                              <input type="checkbox" id="bQ"> Black Queenside</label>
+                           </li>
+                        </ul>
+                        <div class="text-center">
+                           <label>En-passant square</label>
+                        </div>
+                        <ul class="list-group">
+                           <li class="list-group-item">
+                              <div class="form-group">
+                                 <label for="sel1">Select list:</label>
+                                 <select class="form-control" id="enPassant">
+                                    <option selected="selected" value="">Select a square</option>
+                                    <option value="a3">a3</option>
+                                    <option value="b3">b3</option>
+                                    <option value="c3">c3</option>
+                                    <option value="d3">d3</option>
+                                    <option value="e3">e3</option>
+                                    <option value="f3">f3</option>
+                                    <option value="g3">g3</option>
+                                    <option value="h3">h3</option>
+                                    <option value="a6">a6</option>
+                                    <option value="b6">b6</option>
+                                    <option value="c6">c6</option>
+                                    <option value="d6">d6</option>
+                                    <option value="e6">e6</option>
+                                    <option value="f6">f6</option>
+                                    <option value="g6">g6</option>
+                                    <option value="h6">h6</option>
+                                 </select>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
                   </div>
-              </div>
-          </div>
-    </div>
-    <footer class="section section-custom">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6">
-            <img src="img/logo/name_large_transp.png" class="img-responsive" width="380">
-            <p>Diagram Club is an app and a website, made with <a href="http://diagramclub.github.io/img/assets/love.png" target="_blank" class="linkedLight">love</a> using wonderful libraries
-              like <a href="https://github.com/official-stockfish" target="_blank" class="linkedLight">Stockfish UCI Chess Engine</a>, <a href="http://chessboardjs.com/" target="_blank" class="linkedLight">ChessBoard.JS</a>, <a href="https://github.com/jhlywa/chess.js" target="_blank" class="linkedLight">Chess.JS</a>,
-              and others.</p>
-          </div>
-          <div class="col-sm-6">
-            <p class="text-info text-right">
-              <br>
-              <br>
-            </p>
-            <div class="row">
-              <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
-                <a href="https://www.instagram.com/diagramclub/" target="_blank"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
-                <a href="https://twitter.com/diagramclub" target="_blank"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
-                <a href="http://facebook.com/diagramclub" target="_blank"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
-              </div>
+               </div>
             </div>
+         </div>
+         <div class="container">
             <div class="row">
-              <div class="col-md-12 hidden-xs text-right">
-                <a href="https://www.instagram.com/diagramclub/" target="_blank"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
-                <a href="https://twitter.com/diagramclub" target="_blank"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
-                <a href="http://facebook.com/diagramclub" target="_blank"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
-              </div>
+               <div class="col-md-12 text-center">
+                  <div class="row">
+                     <div class="col-md-4 text-right">
+                        <h4>FEN:</h4>
+                     </div>
+                     <div class="col-md-4"><input type="text" class="form-control" id="fen" readonly=""></div>
+                     <div class="col-md-4 text-left">
+                        <input type="checkbox" id="checkCustomFEN"> <label>Custom FEN</label>
+                        <p><a class="btn btn-info" style="display: none" id="updateBtn" onclick="updatePosition();">UPDATE POSITION</a></p>
+                     </div>
+                  </div>
+               </div>
             </div>
-          </div>
-        </div>
+         </div>
+         <div class="container">
+            <div class="row top-buffer">
+               <div class="col-md-12">
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6 text-center">
+                     <div id="QRandButton" style="display: none;">
+                        <div class="row">
+                           <div id="containerQrCode">
+                              <canvas class="img-responsive" style="display: initial" width="300" height="300"></canvas>
+                           </div>
+                        </div>
+                        <div class="row top-buffer text-center">
+                           <a class="linked" id="fenLink" href="" target="_blank"></a>
+                        </div>
+                        <div class="row top-buffer text-center">
+                           <span class="label label-danger">Important</span> If you have a valid position but your QR-Code is unreadable, generate a new QR-Code with more error correction by clicking <a class="linked" onclick="unreadableClick();">here</a>.
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-3"></div>
+               </div>
+            </div>
+         </div>
       </div>
-    </footer>
-<img id="img-buffer" src="img/assets/name_qrcode.png">
-</body>
-<script>
-        var board,
-         game = new Chess(),
-         fenEl = $('#fen'),
-         fenLink = $('#fenLink'),
-         imgFen = $('#imgFen'),
-         nextMoveSide = 'w',
-         wK = $('#wK'),
-         wKStr = '',
-         wQ = $('#wQ'),
-         wQStr = '',
-         bK = $('#bK'),
-         bKStr = '',
-         bQ = $('#bQ'),
-         bQStr = '',
-         strCastling = "",
-         finalFen = "",
-         enPassant = $('#enPassant');
-         enPassantStr = '-',
-         isEditableFEN = $('#checkCustomFEN'),
-         updateBtn = $('#updateBtn');
+      <footer class="section section-custom">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-6">
+                  <img src="img/logo/name_large_transp.png" class="img-responsive" width="380">
+                  <p>Diagram Club is an app and a website, made with <a href="http://diagramclub.github.io/img/assets/love.png" target="_blank" class="linkedLight">love</a> using wonderful libraries
+                     like <a href="https://github.com/official-stockfish" target="_blank" class="linkedLight">Stockfish UCI Chess Engine</a>, <a href="http://chessboardjs.com/" target="_blank" class="linkedLight">ChessBoard.JS</a>, <a href="https://github.com/jhlywa/chess.js" target="_blank" class="linkedLight">Chess.JS</a>,
+                     and others.
+                  </p>
+               </div>
+               <div class="col-sm-6">
+                  <p class="text-info text-right">
+                     <br>
+                     <br>
+                  </p>
+                  <div class="row">
+                     <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
+                        <a href="https://www.instagram.com/diagramclub/" target="_blank"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                        <a href="https://twitter.com/diagramclub" target="_blank"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                        <a href="http://facebook.com/diagramclub" target="_blank"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-12 hidden-xs text-right">
+                        <a href="https://www.instagram.com/diagramclub/" target="_blank"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                        <a href="https://twitter.com/diagramclub" target="_blank"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                        <a href="http://facebook.com/diagramclub" target="_blank"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <img id="img-buffer" src="img/assets/name_qrcode.png">
+   </body>
+   <script>
+      var board,
+       game = new Chess(),
+       fenEl = $('#fen'),
+       fenLink = $('#fenLink'),
+       imgFen = $('#imgFen'),
+       nextMoveSide = 'w',
+       wK = $('#wK'),
+       wKStr = '',
+       wQ = $('#wQ'),
+       wQStr = '',
+       bK = $('#bK'),
+       bKStr = '',
+       bQ = $('#bQ'),
+       bQStr = '',
+       strCastling = "",
+       finalFen = "",
+       enPassant = $('#enPassant');
+       enPassantStr = '-',
+       isEditableFEN = $('#checkCustomFEN'),
+       updateBtn = $('#updateBtn');
 
-         isEditableFEN.change(function(){
-              if(this.checked){
-                fenEl.removeAttr('readonly');
-                updateBtn.removeAttr('style');
-              }else{
-                fenEl.attr('readonly', 'readonly');
-                updateBtn.attr('style','display: none');
-              }
-          });
+       isEditableFEN.change(function(){
+            if(this.checked){
+              fenEl.removeAttr('readonly');
+              updateBtn.removeAttr('style');
+            }else{
+              fenEl.attr('readonly', 'readonly');
+              updateBtn.attr('style','display: none');
+            }
+        });
 
-          $("input[name=nextMove]").click(function(){
-              nextMoveSide = $('input[name=nextMove]:checked', '#nextMoveGroup').val();
-              updateStatus(null);
-          });
+        $("input[name=nextMove]").click(function(){
+            nextMoveSide = $('input[name=nextMove]:checked', '#nextMoveGroup').val();
+            updateStatus(null);
+        });
 
-          $('#wK').click(function() {
-              if (this.checked) {
-                wKStr = 'K'
-              }else{
-                wKStr = '';
-              }
-
-              updateStatus(null);
-          });
-
-          $('#wQ').click(function() {
-              if (this.checked) {
-                wQStr = 'Q'
-              }else{
-                wQStr = '';
-              }
-
-              updateStatus(null);
-          });
-
-          $('#bK').click(function() {
-              if (this.checked) {
-                bKStr = 'k'
-              }else{
-                bKStr = '';
-              }
-
-              updateStatus(null);
-          });
-
-          $('#bQ').click(function() {
-              if (this.checked) {
-                bQStr = 'q'
-              }else{
-                bQStr = '';
-              }
-
-              updateStatus(null);
-          });
-
-          enPassant.on("change paste keyup", function() {
-            enPassantStr = $(this).val();
-             updateStatus(null);
-          });
-
-         // update the board position after the piece snap
-         // for castling, en passant, pawn promotion
-         var onSnapEnd = function() {
-           updateStatus(null);
-         };
-
-         var onDrop = function(source, target, piece, newPos, oldPos, orientation) {
-
-           //se a peça saiu do tabuleiro, ela foi descartada e é preciso atualizar o código fen
-            if (target == "offboard") {
-              updateStatus(newPos);
-              return 'trash';
-
+        $('#wK').click(function() {
+            if (this.checked) {
+              wKStr = 'K'
+            }else{
+              wKStr = '';
             }
 
-          };
+            updateStatus(null);
+        });
 
-         var updateStatus = function(newPos) {
+        $('#wQ').click(function() {
+            if (this.checked) {
+              wQStr = 'Q'
+            }else{
+              wQStr = '';
+            }
 
-           var fenPosition;
+            updateStatus(null);
+        });
 
-           strCastling = wKStr+wQStr+bKStr+bQStr;
+        $('#bK').click(function() {
+            if (this.checked) {
+              bKStr = 'k'
+            }else{
+              bKStr = '';
+            }
 
-           if (strCastling == '') {
-             strCastling = '-'
-           }
+            updateStatus(null);
+        });
 
-           if (enPassantStr == '') {
-             enPassantStr = '-'
-           }
+        $('#bQ').click(function() {
+            if (this.checked) {
+              bQStr = 'q'
+            }else{
+              bQStr = '';
+            }
 
-           if(newPos){
-             fenPosition = ChessBoard.objToFen(newPos);
-           }else{
-             fenPosition = board.fen()
-           }
+            updateStatus(null);
+        });
 
-           finalFen = fenPosition+" "+nextMoveSide+" "+strCastling+" "+enPassantStr;
-
-           fenEl.val(fenPosition);
-           fenLink.text("http://diagramclub.github.io/r.html?v="+finalFen);
-           fenLink.attr("href", "http://diagramclub.github.io/r.html?v="+finalFen);
-
-           if (finalFen != "8/8/8/8/8/8/8/8 w - -")
-              $('#QRandButton').removeAttr('style');
-              createQR(finalFen);
-         };
-
-         var unreadableClick = function() {
-             $('#containerQrCode').empty().qrcode({
-                 // https://larsjung.de/jquery-qrcode/,vv
-                 render: 'image',
-                 ecLevel: 'H',
-                 size: 300,
-                 fill: '#2d3e4e',
-                 mode: 4,
-                 mSize: 0.1,
-                 radius: 0.5,
-                 quiet: 0,
-                 text: finalFen,
-                 image: $('#img-buffer')[0]
-                 });
-         };
-
-         var createQR = function(string){
-                     $('#containerQrCode').empty().qrcode({
-                         // https://larsjung.de/jquery-qrcode/
-                         render: 'image',
-                         ecLevel: 'Q',
-                         size: 300,
-                         fill: '#2d3e4e',
-                         mode: 4,
-                         mSize: 0.1,
-                         radius: 0.5,
-                         quiet: 0,
-                         text: string,
-                         image: $('#img-buffer')[0]
-                         });
-                 };
-
-         var startClick = function(){
-           board.start();
+        enPassant.on("change paste keyup", function() {
+          enPassantStr = $(this).val();
            updateStatus(null);
-         };
+        });
 
-         var clearClick = function(){
-           board.clear();
-           updateStatus(null);
-         };
-
-         var flipClick = function(){
-           board.flip();
-           updateStatus(null);
-         };
-
-         var updatePosition = function(){
-           board.position(fenEl.val());
-           updateStatus(null);
-         };
-
-         var cfg = {
-           pieceTheme: 'img/chesspieces/alpha/{piece}.png',
-           draggable: true,
-           sparePieces: true,
-           dropOffBoard: 'trash',
-           onSnapEnd: onSnapEnd,
-           onDrop : onDrop
-         };
-
-         board = ChessBoard('board', cfg);
-
-        $(window).resize(board.resize);
+       // update the board position after the piece snap
+       // for castling, en passant, pawn promotion
+       var onSnapEnd = function() {
          updateStatus(null);
-</script>
+       };
+
+       var onDrop = function(source, target, piece, newPos, oldPos, orientation) {
+
+         //se a peça saiu do tabuleiro, ela foi descartada e é preciso atualizar o código fen
+          if (target == "offboard") {
+            updateStatus(newPos);
+            return 'trash';
+
+          }
+
+        };
+
+       var updateStatus = function(newPos) {
+
+         var fenPosition;
+
+         strCastling = wKStr+wQStr+bKStr+bQStr;
+
+         if (strCastling == '') {
+           strCastling = '-'
+         }
+
+         if (enPassantStr == '') {
+           enPassantStr = '-'
+         }
+
+         if(newPos){
+           fenPosition = ChessBoard.objToFen(newPos);
+         }else{
+           fenPosition = board.fen()
+         }
+
+         finalFen = fenPosition+" "+nextMoveSide+" "+strCastling+" "+enPassantStr;
+
+         fenEl.val(fenPosition);
+         fenLink.text("http://diagramclub.github.io/r.html?v="+finalFen);
+         fenLink.attr("href", "http://diagramclub.github.io/r.html?v="+finalFen);
+
+         if (finalFen != "8/8/8/8/8/8/8/8 w - -")
+            $('#QRandButton').removeAttr('style');
+            createQR(finalFen);
+       };
+
+       var unreadableClick = function() {
+           $('#containerQrCode').empty().qrcode({
+               // https://larsjung.de/jquery-qrcode/,vv
+               render: 'image',
+               ecLevel: 'H',
+               size: 300,
+               fill: '#2d3e4e',
+               mode: 4,
+               mSize: 0.1,
+               radius: 0.5,
+               quiet: 0,
+               text: finalFen,
+               image: $('#img-buffer')[0]
+               });
+       };
+
+       var createQR = function(string){
+                   $('#containerQrCode').empty().qrcode({
+                       // https://larsjung.de/jquery-qrcode/
+                       render: 'image',
+                       ecLevel: 'Q',
+                       size: 300,
+                       fill: '#2d3e4e',
+                       mode: 4,
+                       mSize: 0.1,
+                       radius: 0.5,
+                       quiet: 0,
+                       text: string,
+                       image: $('#img-buffer')[0]
+                       });
+               };
+
+       var startClick = function(){
+         board.start();
+         updateStatus(null);
+       };
+
+       var clearClick = function(){
+         board.clear();
+         updateStatus(null);
+       };
+
+       var flipClick = function(){
+         board.flip();
+         updateStatus(null);
+       };
+
+       var updatePosition = function(){
+         board.position(fenEl.val());
+         updateStatus(null);
+       };
+
+       var cfg = {
+         pieceTheme: 'img/chesspieces/alpha/{piece}.png',
+         draggable: true,
+         sparePieces: true,
+         dropOffBoard: 'trash',
+         onSnapEnd: onSnapEnd,
+         onDrop : onDrop
+       };
+
+       board = ChessBoard('board', cfg);
+
+      $(window).resize(board.resize);
+       updateStatus(null);
+   </script>
 </html>
