@@ -385,8 +385,12 @@
            board.position(game.fen());
            createQR(game.pgn());
            $('#QRandButton').removeAttr('style');
-           pgnLink.text("http://diagramclub.github.io/r.html?v="+game.pgn());
-           pgnLink.attr("href", "http://diagramclub.github.io/r.html?v="+game.pgn());
+
+           var strPgnClean = game.pgn();
+           var strPgnClean = $.trim(strPgnClean.replace(/\[.*\]/g,''));
+
+           pgnLink.text("http://diagramclub.github.io/r.html?v="+strPgnClean);
+           pgnLink.attr("href", "http://diagramclub.github.io/r.html?v="+strPgnClean);
          };
 
          var cfg = {
