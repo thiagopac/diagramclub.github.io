@@ -389,16 +389,57 @@
          };
 
          var updatePosition = function(){
-           game.load_pgn(pgnEl.val());
+
+           game.load_pgn(translatePieces(pgnEl.val(), pgnEl.val().indexOf('C') > - 1 ? "pt-br" : "en-us"));
+
            board.position(game.fen());
            createQR(game.pgn());
            $('#QRandButton').removeAttr('style');
+           undoBtn.removeAttr("disabled");
 
            var strPgnClean = game.pgn();
            var strPgnClean = $.trim(strPgnClean.replace(/\[.*\]/g,''));
 
            pgnLink.text("http://diagramclub.github.io/r.html?v="+encodeURIComponent(strPgnClean));
            pgnLink.attr("href", "http://diagramclub.github.io/r.html?v="+encodeURIComponent(strPgnClean));
+         };
+
+         var translatePieces = function(pgn, language){
+
+           if (language == "pt-br") {
+             console.log("é português");
+             console.log("Antes: "+pgn);
+             //P de Peão para P de Pawn - em português e inglês, as iniciais são as mesmas,
+             //mas estou criando essa condição para ser replicada para outros idiomas onde as
+             //iniciais da peça do Peão não coincidirem sendo a mesma letra ;-)
+             pgn = pgn.replace(/P/g, 'P');
+
+             //C de Cavalo para N de kNight
+             pgn = pgn.replace(/C/g, 'N');
+
+             //B de Bispo para B de Bishop - em português e inglês, as iniciais são as mesmas,
+             //mas estou criando essa condição para ser replicada para outros idiomas onde as
+             //iniciais da peça do Bispo não coincidirem sendo a mesma letra ;-)
+             pgn = pgn.replace(/B/g, 'B');
+
+             //R de Rei para K de King
+             pgn = pgn.replace(/R/g, 'K');
+
+             //T de Torre para R de Rook
+             pgn = pgn.replace(/T/g, 'R');
+
+             //D de Dama para Q de Queen
+             pgn = pgn.replace(/D/g, 'Q');
+
+             console.log("Depois: "+pgn);
+
+             return pgn;
+           }else if (language == "en-us"){
+
+             //nenhuma alteração se for inglês
+             return pgn;
+           }
+
          };
 
          var cfg = {
