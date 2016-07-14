@@ -1,0 +1,43 @@
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdn.bootcss.com/lrsjng.jquery-qrcode/0.14.0/jquery-qrcode.js"></script>
+	<script type="text/javascript">
+
+	    $(document).ready(function () {
+	        getUrl();
+	    });
+	function getUrl(){
+	        id = 'id';
+	        url = location.href;
+	        id = id.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+	        var regexS = "[\\?&]"+id+"=([^&#]*)";
+	        var regex = new RegExp( regexS );
+	        var results = regex.exec( url );
+	        console.log(results[1]);
+
+					var divQrCode = $('#QR-Code');
+					createQR(results[1]);
+	}
+
+	var createQR = function(string){
+			$('#containerQrCode').empty().qrcode({
+					render: 'image',
+					ecLevel: 'Q',
+					size: 300,
+					fill: '#2d3e4e',
+					mode: 4,
+					mSize: 0.1,
+					radius: 0.5,
+					quiet: 0,
+					text: string,
+					image: $('#img-buffer')[0]
+					});
+	};
+	</script>
+	<html>
+	<head></head>
+	<body >
+		<div id="containerQrCode">
+			 <canvas class="img-responsive" style="display: initial" width="300" height="300"></canvas>
+		</div>
+	</body>
+	</html>
