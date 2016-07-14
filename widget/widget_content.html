@@ -6,8 +6,8 @@
 		<link href="../styles\custom.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-		<div id="containerQrCode">
-			 <canvas style="display: initial" width="300" height="300"></canvas>
+		<div id="containerQrCode" style="text-align:center">
+			 <canvas style="display:initial"></canvas>
 		</div>
 		<img id="img-buffer" src="../img/assets/name_qrcode.png">
 	</body>
@@ -23,24 +23,32 @@
 			        id = id.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
 			        var regexS = "[\\?&]"+id+"=([^&#]*)";
 			        var regex = new RegExp( regexS );
-			        var results = regex.exec( url );
-			        console.log(results[1]);
+			        var qrcode = regex.exec( url );
+			        console.log(qrcode[1]);
+
+							size = 'size';
+							url = location.href;
+							size = size.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+							var regexS = "[\\?&]"+size+"=([^&#]*)";
+							var regex = new RegExp( regexS );
+							var size = regex.exec( url );
+							console.log(size[1]);
 
 							var divQrCode = $('#QR-Code');
-							createQR(results[1]);
+							createQR(qrcode[1],size[1]);
 
 			}
 
-			function createQR(string){
+			function createQR(pgn, size){
 							$('#containerQrCode').empty().qrcode({
 									render: 'image',
 									ecLevel: 'Q',
-									size: 300,
+									size: size-16,
 									fill: '#2d3e4e',
 									mSize: 0.1,
 									radius: 0.5,
 									quiet: 0,
-									text: string,
+									text: pgn,
 									mode: 4,
 									image: $('#img-buffer')[0]
 									});
