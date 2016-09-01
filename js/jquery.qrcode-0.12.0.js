@@ -299,7 +299,7 @@
         var context = $canvas[0].getContext('2d');
 
         drawBackground(qr, context, settings);
-        drawModules(qr, context, settings);
+        drawModules(qr, context, settings); 
 
         return $canvas;
     }
@@ -314,7 +314,7 @@
     // Returns an `image` element representing the QR code for the given settings.
     function createImage(settings) {
 
-        return $('<img style="display:initial" class="img-responsive"/>').attr('src', createCanvas(settings)[0].toDataURL('image/png'));
+        return $('<img style="display:initial" class="img-responsive"/>').attr('src', createCanvas(settings)[0].toDataURL('image/jpeg'));
     }
 
     // Returns a `div` element representing the QR code for the given settings.

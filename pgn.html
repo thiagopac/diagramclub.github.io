@@ -390,7 +390,19 @@
 
          var updatePosition = function(){
 
-           game.load_pgn(translatePieces(pgnEl.val(), pgnEl.val().indexOf('C') > - 1 ? "pt-br" : "en-us"));
+           var language = "en-us";
+
+           if (pgnEl.val().indexOf('C') > - 1){
+                language = "pt-br";
+           }else if(pgnEl.val().indexOf('N') > - 1){
+                language = "en-us";
+           }else if(pgnEl.val().indexOf('♘') > - 1){
+                language = "unicode-1";
+           }else if(pgnEl.val().indexOf('¤') > - 1){
+                language = "unicode-2";
+           }
+
+           game.load_pgn(translatePieces(pgnEl.val(),language));
 
            board.position(game.fen());
            createQR(game.pgn());
@@ -407,8 +419,8 @@
          var translatePieces = function(pgn, language){
 
            if (language == "pt-br") {
-             console.log("é português");
-             console.log("Antes: "+pgn);
+            //  console.log("é português");
+            //  console.log("Antes: "+pgn);
              //P de Peão para P de Pawn - em português e inglês, as iniciais são as mesmas,
              //mas estou criando essa condição para ser replicada para outros idiomas onde as
              //iniciais da peça do Peão não coincidirem sendo a mesma letra ;-)
@@ -431,12 +443,61 @@
              //D de Dama para Q de Queen
              pgn = pgn.replace(/D/g, 'Q');
 
-             console.log("Depois: "+pgn);
+            //  console.log("Depois: "+pgn);
 
              return pgn;
            }else if (language == "en-us"){
 
              //nenhuma alteração se for inglês
+             return pgn;
+           }else if (language == "unicode-1") {
+            //  console.log("é unicode-1");
+            //  console.log("Antes: "+pgn);
+
+             //exemplo: 1. e4 e5 2. ♘f3 ♞c6 3. ♗b5 ♝b4
+
+             pgn = pgn.replace(/♙/g, 'P');
+             pgn = pgn.replace(/♟/g, 'P');
+
+
+             pgn = pgn.replace(/♘/g, 'N');
+             pgn = pgn.replace(/♞/g, 'N');
+
+             pgn = pgn.replace(/♗/g, 'B');
+             pgn = pgn.replace(/♝/g, 'B');
+
+             pgn = pgn.replace(/♔/g, 'K');
+             pgn = pgn.replace(/♚/g, 'K');
+
+             pgn = pgn.replace(/♖/g, 'R');
+             pgn = pgn.replace(/♜/g, 'R');
+
+             pgn = pgn.replace(/♕/g, 'Q');
+             pgn = pgn.replace(/♛/g, 'Q');
+
+            //  console.log("Depois: "+pgn);
+
+             return pgn;
+           }else if (language == "unicode-2") {
+            //  console.log("é unicode-2");
+            //  console.log("Antes: "+pgn);
+
+             //exemplo: 1. e4 e5 2. ¤f3 ¤c6 3. ¥b5 ¥b4
+
+            //  pgn = pgn.replace(/P/g, 'P');
+
+             pgn = pgn.replace(/¤/g, 'N');
+
+             pgn = pgn.replace(/¥/g, 'B');
+
+             pgn = pgn.replace(/¢/g, 'K');
+
+             pgn = pgn.replace(/¦/g, 'R');
+
+             pgn = pgn.replace(/£/g, 'Q');
+
+            //  console.log("Depois: "+pgn);
+
              return pgn;
            }
 
