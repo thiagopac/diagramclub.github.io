@@ -188,7 +188,7 @@
                         			<td><div id="qrcode-out"></td>
                         		</tr>
                         		<tr>
-                        			<td align="center"><a class="linked" id="fenLink" style="word-wrap:break-word;" href="" target="_blank"></a></td>
+                        			<td align="center"><a class="linked" id="fenLink2" style="word-wrap:break-word;" href="" target="_blank"></a></td>
                         		</tr>
                         	</tbody>
                       </table>
@@ -239,6 +239,7 @@
        game = new Chess(),
        fenEl = $('#fen'),
        fenLink = $('#fenLink'),
+       fenLink2 = $('#fenLink2'),
        imgFen = $('#imgFen'),
        nextMoveSide = 'w',
        wK = $('#wK'),
@@ -358,6 +359,9 @@
          fenEl.val(fenPosition);
          fenLink.text("http://diagramclub.github.io/r.html?v="+encodeURIComponent(finalFen));
          fenLink.attr("href", "http://diagramclub.github.io/r.html?v="+encodeURIComponent(finalFen));
+
+         fenLink2.text("http://diagramclub.github.io/r.html?v="+encodeURIComponent(finalFen));
+         fenLink2.attr("href", "http://diagramclub.github.io/r.html?v="+encodeURIComponent(finalFen));
 
          if (finalFen != "8/8/8/8/8/8/8/8 w - -")
             $('#QRandButton').removeAttr('style');
