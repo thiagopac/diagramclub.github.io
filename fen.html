@@ -187,8 +187,8 @@
                         			<td rowspan="2"><div id="board-out"></td>
                         			<td><div id="qrcode-out"></td>
                         		</tr>
-                        		<tr>
-                        			<td align="center"><a class="linked" id="fenLink2" style="word-wrap:break-word;" href="" target="_blank"></a></td>
+                        		<tr id="link-out" style="display: none;">
+                        			<td align="center"><a class="linked" style="font-size: 13px; color: cornflowerblue" id="fenLink2" style="word-wrap:break-word;" href="" target="_blank"></a></td>
                         		</tr>
                         	</tbody>
                       </table>
@@ -240,6 +240,7 @@
        fenEl = $('#fen'),
        fenLink = $('#fenLink'),
        fenLink2 = $('#fenLink2'),
+       linkout = $('#link-out'),
        imgFen = $('#imgFen'),
        nextMoveSide = 'w',
        wK = $('#wK'),
@@ -446,6 +447,8 @@
                  //document.body.removeChild(canvas);
              }
          });
+
+         linkout.removeAttr('style');
        };
 
        var cfg = {
