@@ -416,8 +416,10 @@
                  $("#board-out").append(canvas);
                  // Clean up
                  //document.body.removeChild(canvas);
-             },
+             }
+         });
 
+         html2canvas($("#containerQrCode"), {
              onrendered: function(canvas) {
                  theCanvas = canvas;
                  document.body.appendChild(canvas);
@@ -429,9 +431,6 @@
                  //document.body.removeChild(canvas);
              }
          });
-
-
-
        };
 
        var cfg = {
