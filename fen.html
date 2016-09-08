@@ -406,20 +406,18 @@
        };
 
        var htmlToImage = function(){
-        //  html2canvas($(".board-b72b1"), {
-        //      onrendered: function(canvas) {
-        //          theCanvas = canvas;
-        //          document.body.appendChild(canvas);
-         //
-        //          // Convert and download as image
-        //          //Canvas2Image.saveAsPNG(canvas);
-        //          $("#board-out").append(canvas);
-        //          // Clean up
-        //          //document.body.removeChild(canvas);
-        //      }
-        //  });
+         html2canvas($(".board-b72b1"), {
+             onrendered: function(canvas) {
+                 theCanvas = canvas;
+                 document.body.appendChild(canvas);
 
-         html2canvas($("#containerQrCode"), {
+                 // Convert and download as image
+                 //Canvas2Image.saveAsPNG(canvas);
+                 $("#board-out").append(canvas);
+                 // Clean up
+                 //document.body.removeChild(canvas);
+             }
+
              onrendered: function(canvas) {
                  theCanvas = canvas;
                  document.body.appendChild(canvas);
