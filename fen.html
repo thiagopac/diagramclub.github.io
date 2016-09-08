@@ -177,14 +177,17 @@
                         <div class="row top-buffer text-center">
                            <span class="label label-danger">Important</span> If you have a valid position but your QR-Code is unreadable, generate a new QR-Code with more error correction by clicking <a class="linked" onclick="unreadableClick();">here</a>.
                         </div>
-
-                        <input type="button" id="btnSave" value="Save board" onclick="htmlToImage();"/>
                         <p></p>
-
+                        <p></p>
+                        <p></p>
+                        <a class="btn btn-success" id="btnSave" value="Save board" onclick="htmlToImage();"/>
+                        <p></p>
+                        <p></p>
+                        <p></p>
                         <table>
                         	<tbody>
                         		<tr>
-                        			<td rowspan="2"><div id="board-out"></td>
+                        			<td rowspan="2" style="vertical-align: top"><div id="board-out"></td>
                         			<td><div id="qrcode-out"></td>
                         		</tr>
                         		<tr id="link-out" style="display: none;">
