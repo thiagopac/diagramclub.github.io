@@ -7,7 +7,6 @@
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
       <script type="text/javascript" src="https://cdn.jsdelivr.net/canvas2image/0.1/canvas2image.min.js"></script>
       <script type="text/javascript" src="https://cdn.jsdelivr.net/canvas2image/0.1/base64.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
       <script type="text/javascript" src="js/jquery.qrcode-0.12.0.js"></script>
       <script type="text/javascript" src="js/chess.js"></script>
       <script type="text/javascript" src="js/chessboard-0.3.0.js"></script>
@@ -181,7 +180,7 @@
                         <p></p>
                         <a class="btn btn-success btn-lg" id="btnSave" onclick="htmlToImage();">EXPORT</a>
                         <p></p>
-                        <table id="table-out">
+                        <table>
                         	<tbody>
                         		<tr>
                         			<td rowspan="2" style="vertical-align: top"><div id="board-out"></td>
@@ -192,7 +191,6 @@
                         		</tr>
                         	</tbody>
                       </table>
-                      <button class="btnCopy" data-clipboard-target="#table-out" data-clipboard-action="copy">Copy to clipboard</button>
                      </div>
                   </div>
                   <div class="col-md-3"></div>
@@ -466,20 +464,6 @@
       $(window).resize(board.resize);
       updateStatus(null);
 
-      var clipboard = new Clipboard('.btnCopy');
-
-      clipboard.on('success', function(e) {
-          console.info('Action:', e.action);
-          console.info('Text:', e.text);
-          console.info('Trigger:', e.trigger);
-
-          e.clearSelection();
-      });
-
-      clipboard.on('error', function(e) {
-          console.error('Action:', e.action);
-          console.error('Trigger:', e.trigger);
-      });
 
 
 
