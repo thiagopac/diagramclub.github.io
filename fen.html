@@ -420,13 +420,13 @@
          });
 
          html2canvas($("#containerQrCode"), {
-             onrendered: function(canvas) {
-                 theCanvas = canvas;
-                 document.body.appendChild(canvas);
+             onrendered: function(canvas2) {
+                 theCanvas2 = canvas2;
+                 document.body.appendChild(canvas2);
 
                  // Convert and download as image
                  //Canvas2Image.saveAsPNG(canvas);
-                 $("#qrcode-out").append(canvas);
+                 $("#qrcode-out").append(canvas2);
                  // Clean up
                  //document.body.removeChild(canvas);
              }
