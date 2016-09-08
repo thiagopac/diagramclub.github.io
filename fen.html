@@ -4,6 +4,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
       <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/canvas2image/0.1/canvas2image.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/canvas2image/0.1/base64.js"></script>
       <script type="text/javascript" src="js/jquery.qrcode-0.12.0.js"></script>
       <script type="text/javascript" src="js/chess.js"></script>
       <script type="text/javascript" src="js/chessboard-0.3.0.js"></script>
@@ -174,6 +177,9 @@
                         <div class="row top-buffer text-center">
                            <span class="label label-danger">Important</span> If you have a valid position but your QR-Code is unreadable, generate a new QR-Code with more error correction by clicking <a class="linked" onclick="unreadableClick();">here</a>.
                         </div>
+
+                        <input type="button" id="btnSave" value="Save board" onclick="htmlToImage();"/>
+                        <div id="img-out"></div>
                      </div>
                   </div>
                   <div class="col-md-3"></div>
@@ -398,6 +404,22 @@
          updateStatus(null);
        };
 
+       var htmlToImage = function(){
+         console.log("Entrou");
+         html2canvas($(".chessboard-63f37"), {
+             onrendered: function(canvas) {
+                 theCanvas = canvas;
+                 document.body.appendChild(canvas);
+
+                 // Convert and download as image
+                 //Canvas2Image.saveAsPNG(canvas);
+                 $("#img-out").append(canvas);
+                 // Clean up
+                 //document.body.removeChild(canvas);
+             }
+         });
+       };
+
        var cfg = {
          pieceTheme: 'img/chesspieces/alpha/{piece}.png',
          draggable: true,
@@ -410,6 +432,10 @@
        board = ChessBoard('board', cfg);
 
       $(window).resize(board.resize);
-       updateStatus(null);
+      updateStatus(null);
+
+
+
+
    </script>
 </html>
