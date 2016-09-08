@@ -179,7 +179,8 @@
                         </div>
 
                         <input type="button" id="btnSave" value="Save board" onclick="htmlToImage();"/>
-                        <div id="img-out"></div>
+                        <div id="board-out"></div>
+                        <div id="qrcode-out"></div>
                      </div>
                   </div>
                   <div class="col-md-3"></div>
@@ -405,7 +406,6 @@
        };
 
        var htmlToImage = function(){
-         console.log("Entrou");
          html2canvas($(".board-b72b1"), {
              onrendered: function(canvas) {
                  theCanvas = canvas;
@@ -413,11 +413,27 @@
 
                  // Convert and download as image
                  //Canvas2Image.saveAsPNG(canvas);
-                 $("#img-out").append(canvas);
+                 $("#board-out").append(canvas);
                  // Clean up
                  //document.body.removeChild(canvas);
              }
          });
+
+         html2canvas($("#containerQrCode"), {
+             onrendered: function(canvas) {
+                 theCanvas = canvas;
+                 document.body.appendChild(canvas);
+
+                 // Convert and download as image
+                 //Canvas2Image.saveAsPNG(canvas);
+                 $("#qrcode-out").append(canvas);
+                 // Clean up
+                 //document.body.removeChild(canvas);
+             }
+         });
+
+
+
        };
 
        var cfg = {
