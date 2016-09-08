@@ -181,18 +181,20 @@
                         <p></p>
                         <a class="btn btn-success btn-lg" id="btnSave" onclick="htmlToImage();">EXPORT</a>
                         <p></p>
-                        <table id="table-out">
-                        	<tbody>
-                        		<tr>
-                        			<td rowspan="2" style="vertical-align: top"><div id="board-out"></td>
-                        			<td><div id="qrcode-out"></td>
-                        		</tr>
-                        		<tr id="link-out" style="display: none;">
-                        			<td align="center"><p></p><a class="linked" style="font-size: 13px; color: cornflowerblue" id="fenLink2" style="word-wrap:break-word;" href="" target="_blank"></a></td>
-                        		</tr>
-                        	</tbody>
-                      </table>
-                      <a class="btn btn-success" data-clipboard-target="#table-out">Copy to clipboard</a>
+                        <div id="copy-out">iiu</div><div>
+                          <table id="table-out">
+                          	<tbody>
+                          		<tr>
+                          			<td rowspan="2" style="vertical-align: top"><div id="board-out"></td>
+                          			<td><div id="qrcode-out"></td>
+                          		</tr>
+                          		<tr id="link-out" style="display: none;">
+                          			<td align="center"><p></p><a class="linked" style="font-size: 13px; color: cornflowerblue" id="fenLink2" style="word-wrap:break-word;" href="" target="_blank"></a></td>
+                          		</tr>
+                          	</tbody>
+                        </table>
+                      </div>
+                      <button class="btnCopy" data-clipboard-target="#copy-out" data-clipboard-action="copy">Copy to clipboard</button>
                      </div>
                   </div>
                   <div class="col-md-3"></div>
@@ -466,6 +468,20 @@
       $(window).resize(board.resize);
       updateStatus(null);
 
+      var clipboard = new Clipboard('.btnCopy');
+
+      clipboard.on('success', function(e) {
+          console.info('Action:', e.action);
+          console.info('Text:', e.text);
+          console.info('Trigger:', e.trigger);
+
+          e.clearSelection();
+      });
+
+      clipboard.on('error', function(e) {
+          console.error('Action:', e.action);
+          console.error('Trigger:', e.trigger);
+      });
 
 
 
