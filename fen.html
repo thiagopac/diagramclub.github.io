@@ -7,6 +7,7 @@
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
       <script type="text/javascript" src="https://cdn.jsdelivr.net/canvas2image/0.1/canvas2image.min.js"></script>
       <script type="text/javascript" src="https://cdn.jsdelivr.net/canvas2image/0.1/base64.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
       <script type="text/javascript" src="js/jquery.qrcode-0.12.0.js"></script>
       <script type="text/javascript" src="js/chess.js"></script>
       <script type="text/javascript" src="js/chessboard-0.3.0.js"></script>
@@ -180,7 +181,7 @@
                         <p></p>
                         <a class="btn btn-success btn-lg" id="btnSave" onclick="htmlToImage();">EXPORT</a>
                         <p></p>
-                        <table>
+                        <table id="table-out">
                         	<tbody>
                         		<tr>
                         			<td rowspan="2" style="vertical-align: top"><div id="board-out"></td>
@@ -191,6 +192,7 @@
                         		</tr>
                         	</tbody>
                       </table>
+                      <a class="btn btn-success" data-clipboard-target="#table-out">Copy to clipboard</a>
                      </div>
                   </div>
                   <div class="col-md-3"></div>
