@@ -28,7 +28,7 @@
               <a href="index.html">HOME</a>
             </li>
             <li>
-              <a href="howitworks.html">HOW IT WORKS?</a>
+              <a href="howitworks.html">COMO FUNCIONA?</a>
             </li>
             <li>
               <a href="fen.html">FEN</a>
@@ -37,7 +37,7 @@
               <a href="pgn.html">PGN</a>
             </li>
             <li>
-              <a href="contact.html">CONTACT</a>
+              <a href="contact.html">CONTATO</a>
             </li>
             <li>
               <img onclick="javascript:location.href='http://diagramclub.github.io/br/pgn.html'" src="http://diagramclub.github.io/img/assets/br.png" width="40" style="margin:10px; cursor:pointer;">
@@ -60,17 +60,17 @@
                   <div class="col-md-4"></div>
                   <div class="col-md-8 text-center" style="float:right">
                     <div class="text-center">
-                      <label>Board state</label>
+                      <label>Estado do tabuleiro</label>
                     </div>
                     <ul class="list-group">
                       <li class="list-group-item">
-                        <a class="btn btn-info" id="startBtn" onclick="startClick();">INITIAL</a>
+                        <a class="btn btn-info" id="startBtn" onclick="startClick();">INICIAL</a>
                       </li>
                       <li class="list-group-item">
-                        <a class="btn btn-primary" id="flipBtn" onclick="flipClick();">FLIP</a>
+                        <a class="btn btn-primary" id="flipBtn" onclick="flipClick();">VIRAR</a>
                       </li>
                       <li class="list-group-item">
-                        <a class="btn btn-success" style="font-family: sans-serif;" id="undoBtn" onclick="undoMove();">UNDO MOVE</a>
+                        <a class="btn btn-success" style="font-family: sans-serif;" id="undoBtn" onclick="undoMove();">DESFAZER</a>
                       </li>
                     </ul>
                   </div>
@@ -88,25 +88,25 @@
                 <div class="row">
                   <div class="text-left">
                     <div class="text-center">
-                      <label>Promote to</label>
+                      <label>Promover para</label>
                     </div>
                     <ul class="list-group">
                       <span id="promotionChoiceGroup">
                         <li class="list-group-item">
                           <label>
-                            <input type="radio" name="promotionChoice" value="q" checked=""> Queen</label>
+                            <input type="radio" name="promotionChoice" value="q" checked=""> Dama</label>
                         </li>
                         <li class="list-group-item">
                           <label>
-                            <input type="radio" name="promotionChoice" value="r"> Rook</label>
+                            <input type="radio" name="promotionChoice" value="r"> Torre</label>
                         </li>
                         <li class="list-group-item">
                           <label>
-                            <input type="radio" name="promotionChoice" value="b"> Bishop</label>
+                            <input type="radio" name="promotionChoice" value="b"> Bispo</label>
                         </li>
                         <li class="list-group-item">
                           <label>
-                            <input type="radio" name="promotionChoice" value="n"> Knight</label>
+                            <input type="radio" name="promotionChoice" value="n"> Cavalo</label>
                         </li>
                       </span>
                     </ul>
@@ -120,8 +120,8 @@
                     <textarea class="form-control" rows="3" id="pgn" readonly=""></textarea>
                   </div>
                   <input type="checkbox" id="checkCustomPGN">
-                  <label>Custom PGN</label>
-                  <a class="btn btn-info" style="display: none" id="updateBtn" onclick="updatePosition();">UPDATE POSITION</a>
+                  <label>PGN próprio</label>
+                  <a class="btn btn-info" style="display: none" id="updateBtn" onclick="updatePosition();">ATUALIZAR POSIÇÃO</a>
                 </div>
               </div>
             </div>
@@ -143,9 +143,9 @@
                   <a class="linked" style="word-wrap:break-word;" id="pgnLink" href="" target="_blank"></a>
                 </div>
                 <div class="row top-buffer text-center">
-                  <span class="label label-danger">Important</span>If you have a valid position but your QR-Code is unreadable,
-                  generate a new QR-Code with more error correction by clicking
-                  <a class="linked" onclick="unreadableClick();">here</a>.</div>
+                  <span class="label label-danger">Importante</span> Se você tem uma posição válida mas o QR-Code está ilegível,
+                  gere um novo QR-Code com maior correção de erros clicando
+                  <a class="linked" onclick="unreadableClick();">aqui</a>.</div>
               </div>
             </div>
             <div class="col-md-3"></div>
@@ -157,12 +157,12 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <img src="http://diagramclub.github.io/img/logo/name_large_transp.png" class="img-responsive" width="380">
-            <p>Diagram Club is an app and a website, made with
-              <a href="http://diagramclub.github.io/img/assets/love.png" target="_blank" class="linkedLight">love</a>using wonderful libraries like
+            <img src="../img/logo/name_large_transp.png" class="img-responsive" width="380">
+            <p>Diagram é um aplicativo e website, feito com
+              <a href="http://diagramclub.github.io/img/assets/love.png" target="_blank" class="linkedLight">amor</a>, utilizando maravilhosas bibliotecas como
               <a href="https://github.com/official-stockfish" target="_blank" class="linkedLight">Stockfish UCI Chess Engine</a>,
               <a href="http://chessboardjs.com/" target="_blank" class="linkedLight">ChessBoard.JS</a>,
-              <a href="https://github.com/jhlywa/chess.js" target="_blank" class="linkedLight">Chess.JS</a>, and others.</p>
+              <a href="https://github.com/jhlywa/chess.js" target="_blank" class="linkedLight">Chess.JS</a> e outras.</p>
           </div>
           <div class="col-sm-6">
             <p class="text-info text-right">
@@ -298,28 +298,28 @@
              var updateStatus = function() {
                var status = '';
 
-               var moveColor = 'White';
+               var moveColor = 'Brancas';
                if (game.turn() === 'b') {
-                 moveColor = 'Black';
+                 moveColor = 'Negras';
                }
 
                // checkmate?
                if (game.in_checkmate() === true) {
-                 status = 'Game over, ' + moveColor + ' is in checkmate.';
+                 status = 'Fim de jogo, ' + moveColor + ' estão em xeque-mate.';
                }
 
                // draw?
                else if (game.in_draw() === true) {
-                 status = 'Game over, drawn position';
+                 status = 'Fim de jogo, posição empatada';
                }
 
                // game still on
                else {
-                 status = moveColor + ' to move';
+                 status = moveColor + ' movem';
 
                  // check?
                  if (game.in_check() === true) {
-                   status += ', ' + moveColor + ' is in check';
+                   status += ', ' + moveColor + ' estão em xeque';
                  }
                }
 

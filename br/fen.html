@@ -31,7 +31,7 @@
               <a href="index.html">HOME</a>
             </li>
             <li>
-              <a href="howitworks.html">HOW IT WORKS?</a>
+              <a href="howitworks.html">COMO FUNCIONA?</a>
             </li>
             <li class="active">
               <a href="fen.html">FEN</a>
@@ -40,7 +40,7 @@
               <a href="pgn.html">PGN</a>
             </li>
             <li>
-              <a href="contact.html">CONTACT</a>
+              <a href="contact.html">CONTATO</a>
             </li>
             <li>
               <img onclick="javascript:location.href='http://diagramclub.github.io/br/fen.html'" src="http://diagramclub.github.io/img/assets/br.png" width="40" style="margin:10px; cursor:pointer;">
@@ -64,13 +64,13 @@
                 </div>
                 <ul class="list-group">
                   <li class="list-group-item">
-                    <a class="btn btn-info" id="startBtn" onclick="startClick();">INITIAL</a>
+                    <a class="btn btn-info" id="startBtn" onclick="startClick();">INICIAL</a>
                   </li>
                   <li class="list-group-item">
-                    <a class="btn btn-warning" id="clearBtn" onclick="clearClick();">CLEAR</a>
+                    <a class="btn btn-warning" id="clearBtn" onclick="clearClick();">LIMPAR</a>
                   </li>
                   <li class="list-group-item">
-                    <a class="btn btn-primary" id="flipBtn" onclick="flipClick();">FLIP</a>
+                    <a class="btn btn-primary" id="flipBtn" onclick="flipClick();">VIRAR</a>
                   </li>
                 </ul>
               </div>
@@ -79,50 +79,50 @@
               </div>
               <div class="col-md-2 text-left">
                 <div class="text-center">
-                  <label>Next move</label>
+                  <label>Próximo a se mover</label>
                 </div>
                 <ul class="list-group">
                   <span id="nextMoveGroup">
                     <li class="list-group-item">
                       <label>
-                        <input type="radio" name="nextMove" value="w" checked="">White</label>
+                        <input type="radio" name="nextMove" value="w" checked=""> Brancas</label>
                     </li>
                     <li class="list-group-item">
                       <label>
-                        <input type="radio" name="nextMove" value="b">Black</label>
+                        <input type="radio" name="nextMove" value="b"> Negras</label>
                     </li>
                   </span>
                 </ul>
                 <div class="text-center">
-                  <label>Castling Rights</label>
+                  <label>Direitos ao roque</label>
                 </div>
                 <ul class="list-group">
                   <li class="list-group-item">
                     <label>
-                      <input type="checkbox" id="wK">White O-O</label>
+                      <input type="checkbox" id="wK"> Brancas O-O</label>
                   </li>
                   <li class="list-group-item">
                     <label>
-                      <input type="checkbox" id="wQ">White O-O-O</label>
+                      <input type="checkbox" id="wQ"> Brancas O-O-O</label>
                   </li>
                   <li class="list-group-item">
                     <label>
-                      <input type="checkbox" id="bK">Black O-O</label>
+                      <input type="checkbox" id="bK"> Negras O-O</label>
                   </li>
                   <li class="list-group-item">
                     <label>
-                      <input type="checkbox" id="bQ">Black O-O-O</label>
+                      <input type="checkbox" id="bQ"> Negras O-O-O</label>
                   </li>
                 </ul>
                 <div class="text-center">
-                  <label>En-passant square</label>
+                  <label>Casa en-passant</label>
                 </div>
                 <ul class="list-group">
                   <li class="list-group-item">
                     <div class="form-group">
-                      <label for="sel1">Select list:</label>
+                      <label for="sel1">Selecione:</label>
                       <select class="form-control" id="enPassant">
-                        <option selected="selected" value="">Select a square</option>
+                        <option selected="selected" value="">Selecione uma casa</option>
                         <option value="a3">a3</option>
                         <option value="b3">b3</option>
                         <option value="c3">c3</option>
@@ -160,9 +160,9 @@
               </div>
               <div class="col-md-4 text-left">
                 <input type="checkbox" id="checkCustomFEN">
-                <label>Custom FEN</label>
+                <label>FEN próprio</label>
                 <p>
-                  <a class="btn btn-info" style="display: none" id="updateBtn" onclick="updatePosition();">UPDATE POSITION</a>
+                  <a class="btn btn-info" style="display: none" id="updateBtn" onclick="updatePosition();">ATUALIZAR POSIÇÃO</a>
                 </p>
               </div>
             </div>
@@ -184,11 +184,11 @@
                   <a class="linked" id="fenLink" style="word-wrap:break-word;" href="" target="_blank"></a>
                 </div>
                 <div class="row top-buffer text-center">
-                  <span class="label label-danger">Important</span>If you have a valid position but your QR-Code is unreadable,
-                  generate a new QR-Code with more error correction by clicking
+                  <span class="label label-danger">Importante</span> Se você tem uma posição válida mas o QR-Code está ilegível,
+                  gere um novo QR-Code com maior correção de erros clicando
                   <a class="linked" onclick="unreadableClick();">here</a>.</div>
                 <p></p>
-                <a class="btn btn-success btn-lg" id="btnSave" onclick="htmlToImage();">EXPORT</a>
+                <!-- <a class="btn btn-success btn-lg" id="btnSave" onclick="htmlToImage();">EXPORT</a> -->
                 <p></p>
                 <table>
                   <tbody>
@@ -219,12 +219,12 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <img src="http://diagramclub.github.io/img/logo/name_large_transp.png" class="img-responsive" width="380">
-            <p>Diagram Club is an app and a website, made with
-              <a href="http://diagramclub.github.io/img/assets/love.png" target="_blank" class="linkedLight">love</a>using wonderful libraries like
+            <img src="../img/logo/name_large_transp.png" class="img-responsive" width="380">
+            <p>Diagram é um aplicativo e website, feito com
+              <a href="http://diagramclub.github.io/img/assets/love.png" target="_blank" class="linkedLight">amor</a>, utilizando maravilhosas bibliotecas como
               <a href="https://github.com/official-stockfish" target="_blank" class="linkedLight">Stockfish UCI Chess Engine</a>,
               <a href="http://chessboardjs.com/" target="_blank" class="linkedLight">ChessBoard.JS</a>,
-              <a href="https://github.com/jhlywa/chess.js" target="_blank" class="linkedLight">Chess.JS</a>, and others.</p>
+              <a href="https://github.com/jhlywa/chess.js" target="_blank" class="linkedLight">Chess.JS</a> e outras.</p>
           </div>
           <div class="col-sm-6">
             <p class="text-info text-right">
