@@ -6,13 +6,13 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/canvas2image/0.1/canvas2image.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/canvas2image/0.1/base64.js"></script>
-    <script type="text/javascript" src="js/jquery.qrcode-0.12.0.js"></script>
-    <script type="text/javascript" src="js/chess.js"></script>
-    <script type="text/javascript" src="js/chessboard-0.3.0.js"></script>
+    <script type="text/javascript" src="http://diagramclub.github.io/js/jquery.qrcode-0.12.0.js"></script>
+    <script type="text/javascript" src="http://diagramclub.github.io/js/chess.js"></script>
+    <script type="text/javascript" src="http://diagramclub.github.io/js/chessboard-0.3.0.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="styles\site.css" rel="stylesheet" type="text/css">
-    <link href="styles\custom.css" rel="stylesheet" type="text/css">
-    <link href="styles/chessboard-0.3.0.css" rel="stylesheet" type="text/css">
+    <link href="http://diagramclub.github.io/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="http://diagramclub.github.io/styles/custom.css" rel="stylesheet" type="text/css">
+    <link href="http://diagramclub.github.io/styles/chessboard-0.3.0.css" rel="stylesheet" type="text/css">
   </head><body>
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
@@ -24,7 +24,7 @@
             <span class="icon-bar"></span>
           </button>
         </div>
-        <a class="navbar-brand" href="index.html"><img src="img/logo/name_large_transp.png" width="210"></a>
+        <a class="navbar-brand" href="index.html"><img src="http://diagramclub.github.io/img/logo/name_large_transp.png" width="210"></a>
         <div class="collapse navbar-collapse menu" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
@@ -43,10 +43,10 @@
               <a href="contact.html">CONTACT</a>
             </li>
             <li>
-              <img src="img/assets/br.png" width="40" style="margin:10px;">
+              <img onclick="javascript:location.href='http://diagramclub.github.io/br/fen.html'" src="http://diagramclub.github.io/img/assets/br.png" width="40" style="margin:10px; cursor:pointer;">
             </li>
             <li>
-              <img src="img/assets/us.png" width="40" style="margin:10px;">
+              <img onclick="javascript:location.href='http://diagramclub.github.io/fen.html'" src="http://diagramclub.github.io/img/assets/us.png" width="40" style="margin:10px; cursor:pointer;">
             </li>
           </ul>
         </div>
@@ -219,7 +219,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <img src="img/logo/name_large_transp.png" class="img-responsive" width="380">
+            <img src="http://diagramclub.github.io/img/logo/name_large_transp.png" class="img-responsive" width="380">
             <p>Diagram Club is an app and a website, made with
               <a href="http://diagramclub.github.io/img/assets/love.png" target="_blank" class="linkedLight">love</a>using wonderful libraries like
               <a href="https://github.com/official-stockfish" target="_blank" class="linkedLight">Stockfish UCI Chess Engine</a>,
@@ -249,7 +249,7 @@
         </div>
       </div>
     </footer>
-    <img id="img-buffer" src="img/assets/name_qrcode.png">
+    <img id="img-buffer" src="http://diagramclub.github.io/img/assets/name_qrcode.png">
     <script>
       var board,
            game = new Chess(),
@@ -273,7 +273,7 @@
            enPassantStr = '-',
            isEditableFEN = $('#checkCustomFEN'),
            updateBtn = $('#updateBtn');
-    
+
            isEditableFEN.change(function(){
                 if(this.checked){
                   fenEl.removeAttr('readonly');
@@ -283,108 +283,108 @@
                   updateBtn.attr('style','display: none');
                 }
             });
-    
+
             $("input[name=nextMove]").click(function(){
                 nextMoveSide = $('input[name=nextMove]:checked', '#nextMoveGroup').val();
                 updateStatus(null);
             });
-    
+
             $('#wK').click(function() {
                 if (this.checked) {
                   wKStr = 'K'
                 }else{
                   wKStr = '';
                 }
-    
+
                 updateStatus(null);
             });
-    
+
             $('#wQ').click(function() {
                 if (this.checked) {
                   wQStr = 'Q'
                 }else{
                   wQStr = '';
                 }
-    
+
                 updateStatus(null);
             });
-    
+
             $('#bK').click(function() {
                 if (this.checked) {
                   bKStr = 'k'
                 }else{
                   bKStr = '';
                 }
-    
+
                 updateStatus(null);
             });
-    
+
             $('#bQ').click(function() {
                 if (this.checked) {
                   bQStr = 'q'
                 }else{
                   bQStr = '';
                 }
-    
+
                 updateStatus(null);
             });
-    
+
             enPassant.on("change paste keyup", function() {
               enPassantStr = $(this).val();
                updateStatus(null);
             });
-    
+
            // update the board position after the piece snap
            // for castling, en passant, pawn promotion
            var onSnapEnd = function() {
              updateStatus(null);
            };
-    
+
            var onDrop = function(source, target, piece, newPos, oldPos, orientation) {
-    
+
              //se a peça saiu do tabuleiro, ela foi descartada e é preciso atualizar o código fen
               if (target == "offboard") {
                 updateStatus(newPos);
                 return 'trash';
-    
+
               }
-    
+
             };
-    
+
            var updateStatus = function(newPos) {
-    
+
              var fenPosition;
-    
+
              strCastling = wKStr+wQStr+bKStr+bQStr;
-    
+
              if (strCastling == '') {
                strCastling = '-'
              }
-    
+
              if (enPassantStr == '') {
                enPassantStr = '-'
              }
-    
+
              if(newPos){
                fenPosition = ChessBoard.objToFen(newPos);
              }else{
                fenPosition = board.fen()
              }
-    
+
              finalFen = fenPosition+" "+nextMoveSide+" "+strCastling+" "+enPassantStr;
-    
+
              fenEl.val(fenPosition);
              fenLink.text("http://diagramclub.github.io/r.html?v="+encodeURIComponent(finalFen));
              fenLink.attr("href", "http://diagramclub.github.io/r.html?v="+encodeURIComponent(finalFen));
-    
+
              fenLink2.text("http://diagramclub.github.io/r.html?v="+encodeURIComponent(finalFen));
              fenLink2.attr("href", "http://diagramclub.github.io/r.html?v="+encodeURIComponent(finalFen));
-    
+
              if (finalFen != "8/8/8/8/8/8/8/8 w - -")
                 $('#QRandButton').removeAttr('style');
                 createQR(finalFen);
            };
-    
+
            var unreadableClick = function() {
                $('#containerQrCode').empty().qrcode({
                    // https://larsjung.de/jquery-qrcode/,vv
@@ -400,7 +400,7 @@
                    image: $('#img-buffer')[0]
                    });
            };
-    
+
            var createQR = function(string){
                        $('#containerQrCode').empty().qrcode({
                            // https://larsjung.de/jquery-qrcode/
@@ -416,33 +416,33 @@
                            image: $('#img-buffer')[0]
                            });
                    };
-    
+
            var startClick = function(){
              board.start();
              updateStatus(null);
            };
-    
+
            var clearClick = function(){
              board.clear();
              updateStatus(null);
            };
-    
+
            var flipClick = function(){
              board.flip();
              updateStatus(null);
            };
-    
+
            var updatePosition = function(){
              board.position(fenEl.val());
              updateStatus(null);
            };
-    
+
            var htmlToImage = function(){
              html2canvas($(".board-b72b1"), {
                  onrendered: function(canvas) {
                      theCanvas = canvas;
                      document.body.appendChild(canvas);
-    
+
                      // Convert and download as image
                      //Canvas2Image.saveAsPNG(canvas);
                      $("#board-out").append(canvas);
@@ -450,12 +450,12 @@
                      //document.body.removeChild(canvas);
                  }
              });
-    
+
              html2canvas($("#containerQrCode"), {
                  onrendered: function(canvas2) {
                      theCanvas2 = canvas2;
                      document.body.appendChild(canvas2);
-    
+
                      // Convert and download as image
                      //Canvas2Image.saveAsPNG(canvas);
                      $("#qrcode-out").append(canvas2);
@@ -463,24 +463,24 @@
                      //document.body.removeChild(canvas);
                  }
              });
-    
+
              linkout.removeAttr('style');
            };
-    
+
            var cfg = {
-             pieceTheme: 'img/chesspieces/alpha/{piece}.png',
+             pieceTheme: 'http://diagramclub.github.io/img/chesspieces/alpha/{piece}.png',
              draggable: true,
              sparePieces: true,
              dropOffBoard: 'trash',
              onSnapEnd: onSnapEnd,
              onDrop : onDrop
            };
-    
+
            board = ChessBoard('board', cfg);
-    
+
           $(window).resize(board.resize);
           updateStatus(null);
     </script>
-  
+
 
 </body></html>

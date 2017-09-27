@@ -2,14 +2,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.qrcode-0.12.0.js"></script>
+    <script type="text/javascript" src="http://diagramclub.github.io/js/jquery.qrcode-0.12.0.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/chess.js"></script>
-    <script type="text/javascript" src="js/chessboard-0.3.0.js"></script>
+    <script type="text/javascript" src="http://diagramclub.github.io/js/chess.js"></script>
+    <script type="text/javascript" src="http://diagramclub.github.io/js/chessboard-0.3.0.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="styles/site.css" rel="stylesheet" type="text/css">
-    <link href="styles/custom.css" rel="stylesheet" type="text/css">
-    <link href="styles/chessboard-0.3.0.css" rel="stylesheet" type="text/css">
+    <link href="http://diagramclub.github.io/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="http://diagramclub.github.io/styles/custom.css" rel="stylesheet" type="text/css">
+    <link href="http://diagramclub.github.io/styles/chessboard-0.3.0.css" rel="stylesheet" type="text/css">
   </head><body>
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
@@ -21,7 +21,7 @@
             <span class="icon-bar"></span>
           </button>
         </div>
-        <a class="navbar-brand" href="index.html"><img src="img/logo/name_large_transp.png" width="210"></a>
+        <a class="navbar-brand" href="index.html"><img src="http://diagramclub.github.io/img/logo/name_large_transp.png" width="210"></a>
         <div class="collapse navbar-collapse menu" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
@@ -40,10 +40,10 @@
               <a href="contact.html">CONTACT</a>
             </li>
             <li>
-              <img src="img/assets/br.png" width="40" style="margin:10px;">
+              <img onclick="javascript:location.href='http://diagramclub.github.io/br/pgn.html'" src="http://diagramclub.github.io/img/assets/br.png" width="40" style="margin:10px; cursor:pointer;">
             </li>
             <li>
-              <img src="img/assets/us.png" width="40" style="margin:10px;">
+              <img onclick="javascript:location.href='http://diagramclub.github.io/pgn.html'" src="http://diagramclub.github.io/img/assets/us.png" width="40" style="margin:10px; cursor:pointer;">
             </li>
           </ul>
         </div>
@@ -94,19 +94,19 @@
                       <span id="promotionChoiceGroup">
                         <li class="list-group-item">
                           <label>
-                            <input type="radio" name="promotionChoice" value="q" checked="">Queen</label>
+                            <input type="radio" name="promotionChoice" value="q" checked=""> Queen</label>
                         </li>
                         <li class="list-group-item">
                           <label>
-                            <input type="radio" name="promotionChoice" value="r">Rook</label>
+                            <input type="radio" name="promotionChoice" value="r"> Rook</label>
                         </li>
                         <li class="list-group-item">
                           <label>
-                            <input type="radio" name="promotionChoice" value="b">Bishop</label>
+                            <input type="radio" name="promotionChoice" value="b"> Bishop</label>
                         </li>
                         <li class="list-group-item">
                           <label>
-                            <input type="radio" name="promotionChoice" value="n">Knight</label>
+                            <input type="radio" name="promotionChoice" value="n"> Knight</label>
                         </li>
                       </span>
                     </ul>
@@ -157,7 +157,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <img src="img/logo/name_large_transp.png" class="img-responsive" width="380">
+            <img src="http://diagramclub.github.io/img/logo/name_large_transp.png" class="img-responsive" width="380">
             <p>Diagram Club is an app and a website, made with
               <a href="http://diagramclub.github.io/img/assets/love.png" target="_blank" class="linkedLight">love</a>using wonderful libraries like
               <a href="https://github.com/official-stockfish" target="_blank" class="linkedLight">Stockfish UCI Chess Engine</a>,
@@ -187,7 +187,7 @@
         </div>
       </div>
     </footer>
-    <img id="img-buffer" src="img/assets/name_qrcode.png">
+    <img id="img-buffer" src="http://diagramclub.github.io/img/assets/name_qrcode.png">
     <script>
       var board,
              game = new Chess(),
@@ -200,7 +200,7 @@
              isEditablePGN = $('#checkCustomPGN'),
              updateBtn = $('#updateBtn'),
              undoBtn = $('#undoBtn');
-    
+
              isEditablePGN.change(function(){
                   if(this.checked){
                     pgnEl.removeAttr('readonly');
@@ -210,59 +210,59 @@
                     updateBtn.attr('style','display: none');
                   }
               });
-    
+
              $("input[name=promotionChoice]").click(function(){
                  promotionChoice = $('input[name=promotionChoice]:checked', '#promotionChoiceGroup').val();
              });
-    
+
              var removeGreySquares = function() {
                $('#board .square-55d63').css('background', '');
              };
-    
+
              var greySquare = function(square) {
-    
+
                 var squareEl = $('#board .square-' + square);
-    
+
                 // var background = 'rgba(241, 218, 14, 0.52)';
                 // if (squareEl.hasClass('black-3c85d') === true) {
                 //   background = 'rgba(241, 218, 14, 0.39)';
                 // }
-    
-                var background = 'url("img/assets/select.png")';
+
+                var background = 'url("http://diagramclub.github.io/img/assets/select.png")';
                 var backgroundsize = 'contain';
                 if (squareEl.hasClass('black-3c85d') === true) {
-                  var background = 'url("img/assets/select2.png")';
+                  var background = 'url("http://diagramclub.github.io/img/assets/select2.png")';
                 }
-    
-    
+
+
                 squareEl.css('background', background);
                 squareEl.css('background-size', backgroundsize);
                 squareEl.addClass('taphover');
               };
-    
+
              var onMouseoverSquare = function(square, piece) {
                // get list of possible moves for this square
                var moves = game.moves({
                  square: square,
                  verbose: true
                });
-    
+
                // exit if there are no moves available for this square
                if (moves.length === 0) return;
-    
+
                // highlight the square they moused over
               //  greySquare(square);
-    
+
                // highlight the possible squares for this piece
                for (var i = 0; i < moves.length; i++) {
                  greySquare(moves[i].to);
                }
              };
-    
+
              var onMouseoutSquare = function(square, piece) {
                 removeGreySquares();
              };
-    
+
              // do not pick up pieces if the game is over
              // only pick up pieces for the side to move
              var onDragStart = function(source, piece, position, orientation) {
@@ -272,9 +272,9 @@
                  return false;
                }
              };
-    
+
              var onDrop = function(source, target) {
-    
+
                removeGreySquares();
                // see if the move is legal
                var move = game.move({
@@ -282,47 +282,47 @@
                  to: target,
                  promotion: promotionChoice
                });
-    
+
                // illegal move
                if (move === null) return 'snapback';
-    
+
                updateStatus();
              };
-    
+
              // update the board position after the piece snap
              // for castling, en passant, pawn promotion
              var onSnapEnd = function() {
                board.position(game.fen());
              };
-    
+
              var updateStatus = function() {
                var status = '';
-    
+
                var moveColor = 'White';
                if (game.turn() === 'b') {
                  moveColor = 'Black';
                }
-    
+
                // checkmate?
                if (game.in_checkmate() === true) {
                  status = 'Game over, ' + moveColor + ' is in checkmate.';
                }
-    
+
                // draw?
                else if (game.in_draw() === true) {
                  status = 'Game over, drawn position';
                }
-    
+
                // game still on
                else {
                  status = moveColor + ' to move';
-    
+
                  // check?
                  if (game.in_check() === true) {
                    status += ', ' + moveColor + ' is in check';
                  }
                }
-    
+
                statusEl.html(status);
                fenEl.attr('value',game.fen());
                pgnEl.val(game.pgn());
@@ -330,20 +330,20 @@
                pgnLink.attr("href", "http://diagramclub.github.io/r.html?v="+encodeURIComponent(game.pgn()));
                if(pgnEl.length)
                  pgnEl.scrollTop(pgnEl[0].scrollHeight - pgnEl.height());
-    
+
                if (game.pgn()){
                   $('#QRandButton').removeAttr('style');
                   createQR(game.pgn());
                 }
-    
+
                if ($.trim(pgnEl.val()).length < 1){
                    undoBtn.attr("disabled", "disabled");
                }else{
                    undoBtn.removeAttr("disabled");
                }
-    
+
              };
-    
+
              var unreadableClick = function() {
                  $('#containerQrCode').empty().qrcode({
                      // https://larsjung.de/jquery-qrcode/
@@ -359,7 +359,7 @@
                      image: $('#img-buffer')[0]
                      });
              };
-    
+
              var createQR = function(string){
                  $('#containerQrCode').empty().qrcode({
                      // https://larsjung.de/jquery-qrcode/
@@ -375,19 +375,19 @@
                      image: $('#img-buffer')[0]
                      });
              };
-    
+
              var startClick = function(){
                board.start();
                game.reset();
                updateStatus(null);
                $('#QRandButton').attr('style','display: none;');
              };
-    
+
              var flipClick = function(){
                board.flip();
                updateStatus(null);
              };
-    
+
              var undoMove = function(){
                game.undo();
                board.position(game.fen());
@@ -396,11 +396,11 @@
                  $('#QRandButton').attr('style','display: none;');
                }
              };
-    
+
              var updatePosition = function(){
-    
+
                var language = "en-us";
-    
+
                if (pgnEl.val().indexOf('C') > - 1){
                     language = "pt-br";
                }else if(pgnEl.val().indexOf('N') > - 1){
@@ -410,23 +410,23 @@
                }else if(pgnEl.val().indexOf('¤') > - 1){
                     language = "unicode-2";
                }
-    
+
                game.load_pgn(translatePieces(pgnEl.val(),language));
-    
+
                board.position(game.fen());
                createQR(game.pgn());
                $('#QRandButton').removeAttr('style');
                undoBtn.removeAttr("disabled");
-    
+
                var strPgnClean = game.pgn();
                var strPgnClean = $.trim(strPgnClean.replace(/\[.*\]/g,''));
-    
+
                pgnLink.text("http://diagramclub.github.io/r.html?v="+encodeURIComponent(strPgnClean));
                pgnLink.attr("href", "http://diagramclub.github.io/r.html?v="+encodeURIComponent(strPgnClean));
              };
-    
+
              var translatePieces = function(pgn, language){
-    
+
                if (language == "pt-br") {
                 //  console.log("é português");
                 //  console.log("Antes: "+pgn);
@@ -434,86 +434,86 @@
                  //mas estou criando essa condição para ser replicada para outros idiomas onde as
                  //iniciais da peça do Peão não coincidirem sendo a mesma letra ;-)
                  pgn = pgn.replace(/P/g, 'P');
-    
+
                  //C de Cavalo para N de kNight
                  pgn = pgn.replace(/C/g, 'N');
-    
+
                  //B de Bispo para B de Bishop - em português e inglês, as iniciais são as mesmas,
                  //mas estou criando essa condição para ser replicada para outros idiomas onde as
                  //iniciais da peça do Bispo não coincidirem sendo a mesma letra ;-)
                  pgn = pgn.replace(/B/g, 'B');
-    
+
                  //R de Rei para K de King
                  pgn = pgn.replace(/R/g, 'K');
-    
+
                  //T de Torre para R de Rook
                  pgn = pgn.replace(/T/g, 'R');
-    
+
                  //D de Dama para Q de Queen
                  pgn = pgn.replace(/D/g, 'Q');
-    
+
                 //  console.log("Depois: "+pgn);
-    
+
                  return pgn;
                }else if (language == "en-us"){
-    
+
                  //nenhuma alteração se for inglês
                  return pgn;
                }else if (language == "unicode-1") {
                 //  console.log("é unicode-1");
                 //  console.log("Antes: "+pgn);
-    
+
                  //exemplo: 1. e4 e5 2. ♘f3 ♞c6 3. ♗b5 ♝b4
-    
+
                  pgn = pgn.replace(/♙/g, 'P');
                  pgn = pgn.replace(/♟/g, 'P');
-    
-    
+
+
                  pgn = pgn.replace(/♘/g, 'N');
                  pgn = pgn.replace(/♞/g, 'N');
-    
+
                  pgn = pgn.replace(/♗/g, 'B');
                  pgn = pgn.replace(/♝/g, 'B');
-    
+
                  pgn = pgn.replace(/♔/g, 'K');
                  pgn = pgn.replace(/♚/g, 'K');
-    
+
                  pgn = pgn.replace(/♖/g, 'R');
                  pgn = pgn.replace(/♜/g, 'R');
-    
+
                  pgn = pgn.replace(/♕/g, 'Q');
                  pgn = pgn.replace(/♛/g, 'Q');
-    
+
                 //  console.log("Depois: "+pgn);
-    
+
                  return pgn;
                }else if (language == "unicode-2") {
                 //  console.log("é unicode-2");
                 //  console.log("Antes: "+pgn);
-    
+
                  //exemplo: 1. e4 e5 2. ¤f3 ¤c6 3. ¥b5 ¥b4
-    
+
                 //  pgn = pgn.replace(/P/g, 'P');
-    
+
                  pgn = pgn.replace(/¤/g, 'N');
-    
+
                  pgn = pgn.replace(/¥/g, 'B');
-    
+
                  pgn = pgn.replace(/¢/g, 'K');
-    
+
                  pgn = pgn.replace(/¦/g, 'R');
-    
+
                  pgn = pgn.replace(/£/g, 'Q');
-    
+
                 //  console.log("Depois: "+pgn);
-    
+
                  return pgn;
                }
-    
+
              };
-    
+
              var cfg = {
-               pieceTheme: 'img/chesspieces/alpha/{piece}.png',
+               pieceTheme: 'http://diagramclub.github.io/img/chesspieces/alpha/{piece}.png',
                draggable: true,
                position: 'start',
                onDragStart: onDragStart,
@@ -526,6 +526,6 @@
              $(window).resize(board.resize);
              updateStatus();
     </script>
-  
+
 
 </body></html>
