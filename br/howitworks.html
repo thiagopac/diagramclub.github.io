@@ -4,8 +4,8 @@
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="styles\site.css" rel="stylesheet" type="text/css">
-    <link href="styles\custom.css" rel="stylesheet" type="text/css">
+    <link href="http://diagramclub.github.io/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="http://diagramclub.github.io/styles/custom.css" rel="stylesheet" type="text/css">
   </head><body>
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
@@ -17,13 +17,13 @@
             <span class="icon-bar"></span>
           </button>
         </div>
-        <a class="navbar-brand" href="index.html"><img src="img/logo/name_large_transp.png" width="210"></a>
+        <a class="navbar-brand" href="index.html"><img src="http://diagramclub.github.io/img/logo/name_large_transp.png" width="210"></a>
         <div class="collapse navbar-collapse menu" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
               <a href="index.html">HOME</a>
             </li>
-            <li>
+            <li class="active">
               <a href="howitworks.html">HOW IT WORKS?</a>
             </li>
             <li>
@@ -32,43 +32,16 @@
             <li>
               <a href="pgn.html">PGN</a>
             </li>
-            <li class="active">
+            <li>
               <a href="contact.html">CONTACT</a>
             </li>
             <li>
-              <img src="img/assets/br.png" width="40" style="margin:10px;">
+              <img onclick="javascript:location.href='http://diagramclub.github.io/br/howitworks.html'" src="http://diagramclub.github.io/img/assets/br.png" width="40" style="margin:10px; cursor:pointer;">
             </li>
             <li>
-              <img src="img/assets/us.png" width="40" style="margin:10px;">
+              <img onclick="javascript:location.href='http://diagramclub.github.io/howitworks.html'" src="http://diagramclub.github.io/img/assets/us.png" width="40" style="margin:10px; cursor:pointer;">
             </li>
           </ul>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-4">
-            <img src="img/assets/thiago.png" class="img-responsive" width="300">
-            <h1>thiago castro</h1>
-            <p></p>
-            <p>Diagram's iOS, Android and web Developer. Diagram concept founder.&nbsp;Addicted
-              to chess.&nbsp;
-              <br>
-              <br>thiagopac@gmail.com</p>
-            <p></p>
-          </div>
-          <div class="col-md-4">
-            <img src="img/assets/julio.png" class="img-responsive" width="300">
-            <h1>julio lapertosa</h1>
-            <p></p>
-            <p>Chess coach, teacher and online content creator. Diagram concept founder.
-              Addicted to chess.
-              <br>
-              <br>casadoxadrezbh@gmail.com</p>
-            <p></p>
-          </div>
         </div>
       </div>
     </div>
@@ -76,21 +49,16 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1 class="text-center">Leave us a message</h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-              <div class="cognito">
-                <script src="https://services.cognitoforms.com/s/PKaKTTYOSkuhc0Ff-FVtCQ"></script>
-                <script>
-                  Cognito.load("forms", { id: "1" });
-                </script>
-              </div>
-            </div>
-            <div class="col-md-2"></div>
+            <ol>
+              <li>Download the mobile app&nbsp;according to the platform of your smartphone
+                - iOS or Android</li>
+              <li>Open the app, scan an Diagram QR-Code. (It may have been provided by someone,
+                a book or even created on this site)</li>
+              <li>The application will translate the QR-Code to a playable position or the
+                history of a game. If it is a game, you can navigate through all the moves
+                using the navigation controls, if it is a playable position, you can play
+                it against the Stockfish who will be using their maximum strength.</li>
+            </ol>
           </div>
         </div>
       </div>
@@ -99,7 +67,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <img src="img/logo/name_large_transp.png" class="img-responsive" width="380">
+            <img src="http://diagramclub.github.io/img/logo/name_large_transp.png" class="img-responsive" width="380">
             <p>Diagram Club is an app and a website, made with
               <a href="http://diagramclub.github.io/img/assets/love.png" target="_blank" class="linkedLight">love</a>using wonderful libraries like
               <a href="https://github.com/official-stockfish" target="_blank" class="linkedLight">Stockfish UCI Chess Engine</a>,
@@ -129,6 +97,6 @@
         </div>
       </div>
     </footer>
-  
+
 
 </body></html>
